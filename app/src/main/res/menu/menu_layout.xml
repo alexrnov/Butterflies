@@ -1,0 +1,19 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_about"
+        android:title="@string/about_icon"
+        android:icon="@drawable/about_icon"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_map"
+        android:title="@string/map_icon"
+        android:icon="@drawable/map_icon"
+        app:showAsAction="ifRoom"
+        />
+
+    <item android:id="@+id/action_settings"
+        android:title="@string/tune_icon"
+        android:icon="@drawable/tune_icon"
+        app:showAsAction="ifRoom"/>
+</menu>

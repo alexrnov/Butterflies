@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Butterflies</string>
+    <string name="title_activity_maps">Map</string>
+
+    <!-- title for items of action bar menu -->
+    <string name="map_icon">map</string>
+    <string name="tune_icon">tune</string>
+    <string name="about_icon">about</string>
+
+    <!-- name of tabs -->
+    <string name="tab1">Papilio Linnaeus</string>
+    <string name="tab2">Princeps Hübner</string>
+    <string name="tab3">Chilasa Moore</string>
+    <string name="tab4">Achillides Hübner</string>
+    <string name="tab5">Heraclides Hübner</string>
+    <string name="tab6">Pterourus Scopoli</string>
+    <string name="tab7">Sinoprinceps Hancock</string>
+
+</resources>
