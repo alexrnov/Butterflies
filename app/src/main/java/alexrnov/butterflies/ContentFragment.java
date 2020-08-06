@@ -51,8 +51,8 @@ public class ContentFragment extends Fragment {
     // Now you can access loginViewModel here and onCreateView too
     // (shared instance with the Activity and the other Fragment)
 
-    Log.i("P", "loginViewModel.userRepository.s1 fragment = " + loginViewModel.getUserRepository().getLocalDataSource().getS1());
-    Log.i("P", "loginViewModel.userRepository.s2 fragment = " + loginViewModel.getUserRepository().getRemoteDataSource().getS2());
+    //Log.i("P", "loginViewModel.userRepository.s1 fragment = " + loginViewModel.getUserRepository().getLocalDataSource().getS1());
+    //Log.i("P", "loginViewModel.userRepository.s2 fragment = " + loginViewModel.getUserRepository().getRemoteDataSource().getS2());
 
   }
 

@@ -21,22 +21,9 @@ import javax.inject.Singleton
 @Module
 class NetworkModule(private val context: Context) {
 
-  // @Provides tell Dagger how to create instances of the type that this function
-  // returns (i.e. String).
-  // Function parameters are the dependencies of this type.
-  @Singleton
-  @Provides
-  fun provideUserLocalDataSource(): Int {
-    return 5
-  }
-
   // @Singleton - Way to scope types inside a Dagger Module
-  @Singleton
-  @Provides
-  fun provideUserRemoteDataSource(): String {
-    return "remote"
-  }
-
+  // @Provides tell Dagger how to create instances of the type that this function
+  // returns (i.e. Context). Function parameters are the dependencies of this type.
   @Singleton
   @Provides
   fun provideContext(): Context {
@@ -92,20 +79,11 @@ interface ApplicationComponent {
   fun loginComponent(): LoginComponent.Factory
 }
 
-// Definition of a custom scope called ActivityScope
-@Scope
-@Retention(value = AnnotationRetention.RUNTIME)
-annotation class ActivityScope
-
 // To scope LoginViewModel to the lifecycle of LoginActivity you need to create
 // a new component (a new subgraph) for the login flow and a new scope.
 // @Subcomponent annotation informs Dagger this interface is a Dagger Subcomponent
 // Note that you cannot use the @Singleton annotation because it's already been used
 // by the parent component and that'd make the object an application singleton (unique instance for the whole app).
-// Classes annotated with @ActivityScope are scoped to the graph and the same
-// instance of that type is provided every time the type is requested.
-
-@ActivityScope
 @Subcomponent
 interface LoginComponent {
 
@@ -120,24 +98,17 @@ interface LoginComponent {
   // This tells Dagger that LoginActivity requests injection from LoginComponent
   // so that this subcomponent graph needs to satisfy all the dependencies of the
   // fields that LoginActivity is injecting
-  fun inject(activity: MainActivity)
 
   // if you have a LoginUsernameFragment and a LoginPasswordFragment they
   // need to get injected by the LoginComponent:
 
-  // All LoginActivity, LoginUsernameFragment and LoginPasswordFragment
-  // request injection from LoginComponent. The graph needs to satisfy
-  // all the dependencies of the fields those classes are injecting
-  //fun inject(loginActivity: LoginActivity)
-  //fun inject(usernameFragment: LoginUsernameFragment)
-  //fun inject(passwordFragment: LoginPasswordFragment)
+  // MainActivity and ContentFragment request injection from LoginComponent.
+  // The graph needs to satisfy all the dependencies of the fields those classes are injecting
+
+  fun inject(activity: MainActivity)
   fun inject(contentFragment: ContentFragment)
 }
 
-// A unique instance of LoginViewModel is provided in Components
-// annotated with @ActivityScope. Now, if you had two fragments that
-// need LoginViewModel, both of them are provided with the same instance.
-@ActivityScope
 class LoginViewModel @Inject constructor(
         val userRepository: UserRepository
 ): ViewModel() {
@@ -145,8 +116,6 @@ class LoginViewModel @Inject constructor(
     Log.i("P", "LoginViewModel init")
     Log.i("P", "init package name = " + userRepository.context.opPackageName)
   }
-
-
 
   private val pageIndex = MutableLiveData<Int>()
 
@@ -165,14 +134,7 @@ class LoginViewModel @Inject constructor(
 // @Inject lets Dagger know how to create instances of this object
 // // Scope this class to a component using @Singleton scope (i.e. ApplicationGraph)
 @Singleton
-class UserRepository @Inject constructor(
-        val localDataSource: UserLocalDataSource,
-        val remoteDataSource: UserRemoteDataSource,
-        val context: Context
-) {
-
-
-
+class UserRepository @Inject constructor(val context: Context) {
 
   /** invoke from ViewModel class */
   fun loadList(pageIndex: Int): List<String> {
@@ -181,7 +143,8 @@ class UserRepository @Inject constructor(
 
     Log.i("P", "con repository = " + context.packageName + " page index = " + pageIndex)
 
-    val input = context.assets.open("tab1/item1/description.txt")
+    val index = pageIndex + 1
+    val input = context.assets.open("tab$index/item1/description.txt")
 
 
     val bf: BufferedReader
@@ -234,7 +197,7 @@ class UserRepository @Inject constructor(
       list.add("25")
       list.add("26")
       list.add("27")
-    } else {
+    } else if (pageIndex == 4) {
       list.add("28")
       list.add("29")
       list.add("30")
@@ -242,26 +205,32 @@ class UserRepository @Inject constructor(
       list.add("32")
       list.add("33")
       list.add("34")
+    } else if (pageIndex == 5) {
+      list.add("35")
+      list.add("36")
+      list.add("37")
+      list.add("38")
+      list.add("39")
+      list.add("40")
+      list.add("41")
+    } else if (pageIndex == 6) {
+      list.add("42")
+      list.add("43")
+      list.add("44")
+      list.add("45")
+      list.add("46")
+      list.add("47")
+      list.add("48")
+    } else {
+      list.add("49")
+      list.add("50")
+      list.add("51")
+      list.add("52")
+      list.add("53")
+      list.add("54")
+      list.add("55")
     }
     return list
   }
-
-
-
-
-
-
-}
-
-// If you annotate the other classes too, Dagger knows how to create them:
-class UserLocalDataSource @Inject constructor(
-        val s1: Int
-) {
-
-}
-
-class UserRemoteDataSource @Inject constructor(
-  val s2: String
-) {
 
 }

@@ -45,8 +45,8 @@ class MainActivity : AppCompatActivity() {
     //(applicationContext as Initialization).appComponent.inject(this)
 
     // Now loginViewModel is available
-    Log.i("P", "loginViewModel.userRepository.s1 = " + loginViewModel.userRepository.localDataSource.s1)
-    Log.i("P", "loginViewModel.userRepository.s2 = " + loginViewModel.userRepository.remoteDataSource.s2)
+    //Log.i("P", "loginViewModel.userRepository.s1 = " + loginViewModel.userRepository.localDataSource.s1)
+    //Log.i("P", "loginViewModel.userRepository.s2 = " + loginViewModel.userRepository.remoteDataSource.s2)
     // Now loginViewModel is available
 
     super.onCreate(savedInstanceState)
