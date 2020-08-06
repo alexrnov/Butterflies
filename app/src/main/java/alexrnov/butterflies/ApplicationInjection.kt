@@ -62,12 +62,6 @@ interface ApplicationComponent {
 
   // Note that ApplicationComponent doesn't need to inject LoginActivity
   // anymore because that responsibility now belongs to LoginComponent, so you can remove the inject() method from ApplicationComponent.
-  //fun inject(activity: MainActivity)
-
-  // If you have multiple classes that request injection, you have to specifically
-  // declare them all in the component with their exact type
-  // fun inject(activity: OtherActivity)
-
 
   // Consumers of ApplicationComponent need to know how to create instances of
   // LoginComponent. The parent component must add a method in its interface to
@@ -99,8 +93,8 @@ interface LoginComponent {
   // so that this subcomponent graph needs to satisfy all the dependencies of the
   // fields that LoginActivity is injecting
 
-  // if you have a LoginUsernameFragment and a LoginPasswordFragment they
-  // need to get injected by the LoginComponent:
+  // If you have multiple classes that request injection, you have to specifically
+  // declare them all in the component with their exact type
 
   // MainActivity and ContentFragment request injection from LoginComponent.
   // The graph needs to satisfy all the dependencies of the fields those classes are injecting

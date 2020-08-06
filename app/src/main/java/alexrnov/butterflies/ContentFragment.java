@@ -39,9 +39,9 @@ public class ContentFragment extends Fragment {
     return fragment;
   }
 
+  // When using fragments, inject Dagger in the fragment's onAttach() method.
+  // In this case, it can be done before or after calling super.onAttach().
   public void onAttach(@NonNull Context context) {
-    // When using fragments, inject Dagger in the fragment's onAttach() method.
-    // In this case, it can be done before or after calling super.onAttach().
     super.onAttach(context);
 
     // Obtaining the login graph from LoginActivity and instantiate

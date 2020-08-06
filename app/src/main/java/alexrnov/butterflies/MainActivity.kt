@@ -26,22 +26,13 @@ class MainActivity : AppCompatActivity() {
   // LoginComponent is created in the activity's onCreate() method, and it'll get implicitly destroyed when the activity gets destroyed.
   lateinit var loginComponent: LoginComponent
 
+  // When using activities, inject Dagger in the activity's onCreate() method
+  // before calling super.onCreate() to avoid issues with fragment restoration.
   override fun onCreate(savedInstanceState: Bundle?) {
     // Creation of the login graph using the application graph
     loginComponent = (applicationContext as Initialization).appComponent.loginComponent().create()
-
-    // Make Dagger instantiate @Inject fields in LoginActivity
+    // Make Dagger instantiate @Inject fields in MainActivity
     loginComponent.inject(this)
-
-    /*When using activities, inject Dagger in the activity's onCreate() method
-    before calling super.onCreate() to avoid issues with fragment restoration.
-
-    When using fragments, inject Dagger in the fragment's onAttach() method.
-    In this case, it can be done before or after calling super.onAttach().
-    */
-
-
-    // Now loginViewModel is available
 
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
