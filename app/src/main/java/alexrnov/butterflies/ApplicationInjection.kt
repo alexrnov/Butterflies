@@ -110,12 +110,8 @@ interface LoginComponent {
 }
 
 class LoginViewModel @Inject constructor(
-        val userRepository: UserRepository
+        private val userRepository: UserRepository
 ): ViewModel() {
-  init {
-    Log.i("P", "LoginViewModel init")
-    Log.i("P", "init package name = " + userRepository.context.opPackageName)
-  }
 
   private val pageIndex = MutableLiveData<Int>()
 

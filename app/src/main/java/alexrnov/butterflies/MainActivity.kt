@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
   // annotated with @Inject because you're not expecting that variable to be provided by Dagger.
   // LoginComponent is created in the activity's onCreate() method, and it'll get implicitly destroyed when the activity gets destroyed.
   lateinit var loginComponent: LoginComponent
-  //So to inform Dagger 2 which member variable I want it to create
-  //@Inject lateinit var magicInfo: MagicInfo
 
   override fun onCreate(savedInstanceState: Bundle?) {
     // Creation of the login graph using the application graph
@@ -41,36 +39,13 @@ class MainActivity : AppCompatActivity() {
     When using fragments, inject Dagger in the fragment's onAttach() method.
     In this case, it can be done before or after calling super.onAttach().
     */
-    // Make Dagger instantiate @Inject fields in LoginActivity
-    //(applicationContext as Initialization).appComponent.inject(this)
 
-    // Now loginViewModel is available
-    //Log.i("P", "loginViewModel.userRepository.s1 = " + loginViewModel.userRepository.localDataSource.s1)
-    //Log.i("P", "loginViewModel.userRepository.s2 = " + loginViewModel.userRepository.remoteDataSource.s2)
+
     // Now loginViewModel is available
 
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
 
-    // This Static Class will provide you the Builder to build MagicBox
-    //DaggerMagicComponent.create().inject(this)
-
-    //Log.i("P", "info.text = " + magicInfo.text)
-
-    /*
-    val repositoryComponent: RepositoryComponent = DaggerRepositoryComponent.create()
-    val userRepository: UserRepository = repositoryComponent.repository()
-    val userRepository2: UserRepository = repositoryComponent.repository()
-
-
-    Log.i("P",  "s1 = " + userRepository.s1.s + " s2 = " + userRepository.s2.s)
-
-    if (userRepository == userRepository2) {
-      Log.i("P", "repositories is equals")
-    } else {
-      Log.i("P", "repositories is not equals")
-    }
-    */
     // in case when used MaterialToolbar
     //val toolbar = findViewById<Toolbar>(R.id.topAppBar)
     //setSupportActionBar(toolbar)

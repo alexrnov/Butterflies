@@ -19,20 +19,11 @@ class Initialization : Application() {
 
     super.onCreate()
 
-
+    // Reference to the application graph that is used across the whole app
     appComponent = DaggerApplicationComponent.builder()
             .networkModule(NetworkModule(this.applicationContext))
             .build()
 
-    // Reference to the application graph that is used across the whole app
-    contextComponent = DaggerContextComponent.builder()
-            .contextModule(ContextModule(this.applicationContext))
-            .build()
-
-  }
-
-  companion object {
-    lateinit var contextComponent: ContextComponent
   }
 
 }
