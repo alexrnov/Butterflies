@@ -44,7 +44,7 @@ public class PageContentFragment extends Fragment {
 
     // Obtaining the login graph from LoginActivity and instantiate
     // the @Inject fields with objects from the graph
-    ((MainActivity) getActivity()).loginComponent.inject(this);
+    ((MainActivity) getActivity()).activityComponent.inject(this);
 
     // Now you can access loginViewModel here and onCreateView too
     // (shared instance with the Activity and the other Fragment)

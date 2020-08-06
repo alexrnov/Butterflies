@@ -11,7 +11,7 @@ import javax.inject.Singleton
 
 // @Module informs Dagger that this class is a Dagger Module
 @Module
-class NetworkModule(private val context: Context) {
+class ApplicationModule(private val context: Context) {
 
   // @Singleton - Way to scope types inside a Dagger Module
   // @Provides tell Dagger how to create instances of the type that this function
@@ -25,8 +25,8 @@ class NetworkModule(private val context: Context) {
 
 // The "subcomponents" attribute in the @Module annotation tells Dagger what
 // Subcomponents are children of the Component this module is included in.
-@Module(subcomponents = [LoginComponent::class])
-class SubcomponentsModule {}
+@Module(subcomponents = [ActivityComponent::class])
+class SubModule
 
 // @Component makes Dagger create a graph of dependencies
 // Dagger can create a graph of the dependencies in your project that it can use
@@ -45,50 +45,45 @@ class SubcomponentsModule {}
 // destroyed. Thus, the unique instance of Repository always remains in memory until the application is destroyed.
 
 // Including SubcomponentsModule, tell ApplicationComponent that
-// LoginComponent is its subcomponent.
+// ActivityComponent is its subcomponent.
 @Singleton
-@Component(modules = [NetworkModule::class, SubcomponentsModule::class])
+@Component(modules = [ApplicationModule::class, SubModule::class])
 interface ApplicationComponent {
-  // This tells Dagger that LoginActivity requests injection so the graph needs to
-  // satisfy all the dependencies of the fields that LoginActivity is requesting.
+  // This tells Dagger that MainActivity requests injection so the graph needs to
+  // satisfy all the dependencies of the fields that MainActivity is requesting.
 
-  // Note that ApplicationComponent doesn't need to inject LoginActivity
-  // anymore because that responsibility now belongs to LoginComponent, so you can remove the inject() method from ApplicationComponent.
+  // Note that ApplicationComponent doesn't need to inject MainActivity
+  // anymore because that responsibility now belongs to ActivityComponent, so you can remove the inject() method from ApplicationComponent.
 
   // Consumers of ApplicationComponent need to know how to create instances of
-  // LoginComponent. The parent component must add a method in its interface to
+  // ActivityComponent. The parent component must add a method in its interface to
   // let consumers create instances of the subcomponent out of an instance of the parent component:
 
-  // Expose the factory that creates instances of LoginComponentin the interface:
-  // This function exposes the LoginComponent Factory out of the graph so consumers
-  // can use it to obtain new instances of LoginComponent
-  fun loginComponent(): LoginComponent.Factory
+  // Expose the factory that creates instances of ActivityComponent the interface:
+  // This function exposes the ActivityComponent Factory out of the graph so consumers
+  // can use it to obtain new instances of ActivityComponent
+  fun activityComponent(): ActivityComponent.Factory
 }
 
-// To scope PageViewModel to the lifecycle of LoginActivity you need to create
-// a new component (a new subgraph) for the login flow and a new scope.
-// @Subcomponent annotation informs Dagger this interface is a Dagger Subcomponent
-// Note that you cannot use the @Singleton annotation because it's already been used
+// To scope PageViewModel to the lifecycle of MainActivity you need to create
+// a new component (a new subgraph) for the main activity flow and a new scope. @Subcomponent
+// annotation informs Dagger this interface is a Dagger Subcomponent. Note that you cannot use the @Singleton annotation because it's already been used
 // by the parent component and that'd make the object an application singleton (unique instance for the whole app).
 @Subcomponent
-interface LoginComponent {
+interface ActivityComponent {
 
-  // You also must define a subcomponent factory inside LoginComponent so
-  // that ApplicationComponent knows how to create instances of LoginComponent.
+  // You also must define a subcomponent factory inside MainComponent so
+  // that ApplicationComponent knows how to create instances of MainComponent.
   // Factory that is used to create instances of this subcomponent
   @Subcomponent.Factory
   interface Factory {
-    fun create(): LoginComponent
+    fun create(): ActivityComponent
   }
 
-  // This tells Dagger that LoginActivity requests injection from LoginComponent
-  // so that this subcomponent graph needs to satisfy all the dependencies of the
-  // fields that LoginActivity is injecting
-
-  // If you have multiple classes that request injection, you have to specifically
-  // declare them all in the component with their exact type
-
-  // MainActivity and PageContentFragment request injection from LoginComponent.
+  // This tells Dagger that MainActivity requests injection from ActivityComponent so that this
+  // subcomponent graph needs to satisfy all the dependencies of the fields that MainActivity is injecting
+  // If you have multiple classes that request injection, you have to specifically declare them all in the
+  // component with their exact type. MainActivity and PageContentFragment request injection from ActivityComponent.
   // The graph needs to satisfy all the dependencies of the fields those classes are injecting
 
   fun inject(activity: MainActivity)

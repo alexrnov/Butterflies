@@ -1,7 +1,7 @@
 package alexrnov.butterflies
 
 import alexrnov.butterflies.map.MapsActivity
-import alexrnov.butterflies.model.LoginComponent
+import alexrnov.butterflies.model.ActivityComponent
 import alexrnov.butterflies.model.PageViewModel
 import alexrnov.butterflies.pager.SubgenusPagerAdapter
 import android.content.Intent
@@ -22,21 +22,21 @@ class MainActivity : AppCompatActivity() {
   // Because MainActivity injects LoginViewModel, Dagger builds a graph that knows how
   // to provide an instance of LoginViewModel, and recursively, of its dependencies.
   // Dagger knows how to do this because of the @Inject annotation on the classes' constructor
-  // // Fields that need to be injected by the login graph
+  // Fields that need to be injected by the login graph
   @Inject lateinit var pageViewModel: PageViewModel
 
   // Reference to the Login graph. Notice that the variable loginComponent is not
   // annotated with @Inject because you're not expecting that variable to be provided by Dagger.
   // LoginComponent is created in the activity's onCreate() method, and it'll get implicitly destroyed when the activity gets destroyed.
-  lateinit var loginComponent: LoginComponent
+  lateinit var activityComponent: ActivityComponent
 
   // When using activities, inject Dagger in the activity's onCreate() method
   // before calling super.onCreate() to avoid issues with fragment restoration.
   override fun onCreate(savedInstanceState: Bundle?) {
     // Creation of the login graph using the application graph
-    loginComponent = (applicationContext as Initialization).appComponent.loginComponent().create()
+    activityComponent = (applicationContext as Initialization).applicationComponent.activityComponent().create()
     // Make Dagger instantiate @Inject fields in MainActivity
-    loginComponent.inject(this)
+    activityComponent.inject(this)
 
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_main)
