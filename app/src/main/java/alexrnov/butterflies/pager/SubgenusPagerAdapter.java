@@ -1,9 +1,11 @@
-package alexrnov.butterflies;
+package alexrnov.butterflies.pager;
 
 import android.content.Context;
 
 import org.jetbrains.annotations.NotNull;
 
+import alexrnov.butterflies.R;
+import alexrnov.butterflies.pager.PageContentFragment;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;
@@ -31,8 +33,8 @@ public class SubgenusPagerAdapter extends FragmentPagerAdapter {
   @Override
   public Fragment getItem(int position) {
     // getItem is called to instantiate the fragment for the given page.
-    // Return a ContentFragment (defined as a static inner class below).
-    return ContentFragment.newInstance(position);
+    // Return a PageContentFragment (defined as a static inner class below).
+    return PageContentFragment.newInstance(position);
   }
 
   @Nullable

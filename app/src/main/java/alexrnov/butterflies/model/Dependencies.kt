@@ -1,20 +1,12 @@
-package alexrnov.butterflies
+package alexrnov.butterflies.model
 
+import alexrnov.butterflies.pager.PageContentFragment
+import alexrnov.butterflies.MainActivity
 import android.content.Context
-import android.util.Log
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
 import dagger.Component
 import dagger.Module
 import dagger.Provides
 import dagger.Subcomponent
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStreamReader
-import java.util.ArrayList
-import javax.inject.Inject
-import javax.inject.Scope
 import javax.inject.Singleton
 
 // @Module informs Dagger that this class is a Dagger Module
@@ -50,7 +42,7 @@ class SubcomponentsModule {}
 // to include when building the graph
 // @Singleton - You can use it to annotate ApplicationComponent and the objects you want to reuse across the whole application.
 // Because ApplicationComponent is created when the app is launched (in the application class), it is destroyed when the app gets
-// destroyed. Thus, the unique instance of UserRepository always remains in memory until the application is destroyed.
+// destroyed. Thus, the unique instance of Repository always remains in memory until the application is destroyed.
 
 // Including SubcomponentsModule, tell ApplicationComponent that
 // LoginComponent is its subcomponent.
@@ -73,7 +65,7 @@ interface ApplicationComponent {
   fun loginComponent(): LoginComponent.Factory
 }
 
-// To scope LoginViewModel to the lifecycle of LoginActivity you need to create
+// To scope PageViewModel to the lifecycle of LoginActivity you need to create
 // a new component (a new subgraph) for the login flow and a new scope.
 // @Subcomponent annotation informs Dagger this interface is a Dagger Subcomponent
 // Note that you cannot use the @Singleton annotation because it's already been used
@@ -96,131 +88,10 @@ interface LoginComponent {
   // If you have multiple classes that request injection, you have to specifically
   // declare them all in the component with their exact type
 
-  // MainActivity and ContentFragment request injection from LoginComponent.
+  // MainActivity and PageContentFragment request injection from LoginComponent.
   // The graph needs to satisfy all the dependencies of the fields those classes are injecting
 
   fun inject(activity: MainActivity)
-  fun inject(contentFragment: ContentFragment)
+  fun inject(pageContentFragment: PageContentFragment)
 }
 
-class LoginViewModel @Inject constructor(
-        private val userRepository: UserRepository
-): ViewModel() {
-
-  private val pageIndex = MutableLiveData<Int>()
-
-  // will run only when the returned LiveData is observed. map - Returns a LiveData mapped from
-  // the input source LiveData by applying mapFunction to each value set on source.
-  val items = Transformations.map<Int, List<String>>(pageIndex) { index: Int ->
-    userRepository.loadList(index)
-  }
-
-  fun setIndex(index: Int) {
-    pageIndex.value = index
-  }
-
-}
-
-// @Inject lets Dagger know how to create instances of this object
-// // Scope this class to a component using @Singleton scope (i.e. ApplicationGraph)
-@Singleton
-class UserRepository @Inject constructor(val context: Context) {
-
-  /** invoke from ViewModel class */
-  fun loadList(pageIndex: Int): List<String> {
-
-    //context = Initialization.contextComponent.inject()
-
-    Log.i("P", "con repository = " + context.packageName + " page index = " + pageIndex)
-
-    val index = pageIndex + 1
-    val input = context.assets.open("tab$index/item1/description.txt")
-
-
-    val bf: BufferedReader
-    val result = StringBuilder()
-    try {
-      bf = BufferedReader(InputStreamReader(input))
-      var line = bf.readLine()
-      while (line != null) {
-        result.append(line)
-        result.append(System.getProperty("line.separator"))
-        line = bf.readLine()
-      }
-      Log.i("P", "result = " + result.toString())
-    } catch (e: IOException) {
-      //e.printStackTrace();
-    }
-
-
-    val list: MutableList<String> = ArrayList()
-
-    if (pageIndex == 0) {
-      list.add("0")
-      list.add("1")
-      list.add("2")
-      list.add("3")
-      list.add("4")
-      list.add("5")
-      list.add("6")
-    } else if (pageIndex == 1) {
-      list.add("7")
-      list.add("8")
-      list.add("9")
-      list.add("10")
-      list.add("11")
-      list.add("12")
-      list.add("13")
-    } else if (pageIndex == 2) {
-      list.add("14")
-      list.add("15")
-      list.add("16")
-      list.add("17")
-      list.add("18")
-      list.add("19")
-      list.add("20")
-    } else if (pageIndex == 3) {
-      list.add("21")
-      list.add("22")
-      list.add("23")
-      list.add("24")
-      list.add("25")
-      list.add("26")
-      list.add("27")
-    } else if (pageIndex == 4) {
-      list.add("28")
-      list.add("29")
-      list.add("30")
-      list.add("31")
-      list.add("32")
-      list.add("33")
-      list.add("34")
-    } else if (pageIndex == 5) {
-      list.add("35")
-      list.add("36")
-      list.add("37")
-      list.add("38")
-      list.add("39")
-      list.add("40")
-      list.add("41")
-    } else if (pageIndex == 6) {
-      list.add("42")
-      list.add("43")
-      list.add("44")
-      list.add("45")
-      list.add("46")
-      list.add("47")
-      list.add("48")
-    } else {
-      list.add("49")
-      list.add("50")
-      list.add("51")
-      list.add("52")
-      list.add("53")
-      list.add("54")
-      list.add("55")
-    }
-    return list
-  }
-
-}

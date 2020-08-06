@@ -1,5 +1,9 @@
 package alexrnov.butterflies
 
+import alexrnov.butterflies.map.MapsActivity
+import alexrnov.butterflies.model.LoginComponent
+import alexrnov.butterflies.model.PageViewModel
+import alexrnov.butterflies.pager.SubgenusPagerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -19,7 +23,7 @@ class MainActivity : AppCompatActivity() {
   // to provide an instance of LoginViewModel, and recursively, of its dependencies.
   // Dagger knows how to do this because of the @Inject annotation on the classes' constructor
   // // Fields that need to be injected by the login graph
-  @Inject lateinit var loginViewModel: LoginViewModel
+  @Inject lateinit var pageViewModel: PageViewModel
 
   // Reference to the Login graph. Notice that the variable loginComponent is not
   // annotated with @Inject because you're not expecting that variable to be provided by Dagger.

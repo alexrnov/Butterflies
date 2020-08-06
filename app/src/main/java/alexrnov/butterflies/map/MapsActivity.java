@@ -1,5 +1,6 @@
-package alexrnov.butterflies;
+package alexrnov.butterflies.map;
 
+import alexrnov.butterflies.R;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;

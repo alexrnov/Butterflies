@@ -1,29 +1,27 @@
-package alexrnov.butterflies;
+package alexrnov.butterflies.pager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import javax.inject.Inject;
 
-import alexrnov.butterflies.ButterfliesAdapter;
-import alexrnov.butterflies.LoginViewModel;import androidx.annotation.Nullable;
+import alexrnov.butterflies.MainActivity;
+import alexrnov.butterflies.R;
+import alexrnov.butterflies.model.PageViewModel;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 /** A content fragment containing a view */
-public class ContentFragment extends Fragment {
+public class PageContentFragment extends Fragment {
 
   // Fields that need to be injected by the login graph
-  @Inject LoginViewModel loginViewModel;
+  @Inject
+  PageViewModel pageViewModel;
 
   private static final String ARG_SECTION_NUMBER = "section_number";
 
@@ -31,8 +29,8 @@ public class ContentFragment extends Fragment {
   private RecyclerView recyclerView;
   private ButterfliesAdapter adapter;
 
-  public static ContentFragment newInstance(int index) {
-    ContentFragment fragment = new ContentFragment();
+  public static PageContentFragment newInstance(int index) {
+    PageContentFragment fragment = new PageContentFragment();
     Bundle bundle = new Bundle();
     bundle.putInt(ARG_SECTION_NUMBER, index);
     fragment.setArguments(bundle);
@@ -67,7 +65,7 @@ public class ContentFragment extends Fragment {
     }
     //pageViewModel.setIndex(index);
 
-    loginViewModel.setIndex(index);
+    pageViewModel.setIndex(index);
   }
 
   @Override
@@ -83,7 +81,7 @@ public class ContentFragment extends Fragment {
     // GridLayoutManager arranges the items in a many-dimensional list
     recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
 
-    loginViewModel.getItems().observe(this, items -> {
+    pageViewModel.getItems().observe(this, items -> {
       adapter = new ButterfliesAdapter(items);
       recyclerView.setAdapter(adapter);
     });

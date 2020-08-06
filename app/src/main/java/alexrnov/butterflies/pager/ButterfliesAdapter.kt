@@ -1,5 +1,6 @@
-package alexrnov.butterflies
+package alexrnov.butterflies.pager
 
+import alexrnov.butterflies.R
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView

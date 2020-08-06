@@ -1,11 +1,9 @@
 package alexrnov.butterflies
 
+import alexrnov.butterflies.model.ApplicationComponent
+import alexrnov.butterflies.model.DaggerApplicationComponent
+import alexrnov.butterflies.model.NetworkModule
 import android.app.Application
-import android.content.Context
-import android.util.Log
-import java.io.IOException
-import java.io.InputStream
-import javax.inject.Inject
 
 // contextComponent lives in the Application class to share its lifecycle
 class Initialization : Application() {

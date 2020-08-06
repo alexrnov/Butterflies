@@ -8,4 +8,4 @@
     map:cameraZoom="0"
 
     android:layout_height="match_parent"
-    tools:context=".MapsActivity" />
+    tools:context=".map.MapsActivity" />
