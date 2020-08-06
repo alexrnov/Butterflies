@@ -3,7 +3,7 @@ package alexrnov.butterflies
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
 import alexrnov.butterflies.model.PageViewModel
-import alexrnov.butterflies.pager.SubgenusPagerAdapter
+import alexrnov.butterflies.pager.PagerAdapter
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
     val toolbar = findViewById<Toolbar>(R.id.appToolbar)
     setSupportActionBar(toolbar)
 
-    val subgenusPagerAdapter = SubgenusPagerAdapter(this, supportFragmentManager)
+    val subgenusPagerAdapter = PagerAdapter(this, supportFragmentManager)
     val viewPager = findViewById<ViewPager>(R.id.view_pager)
     viewPager.adapter = subgenusPagerAdapter
     val tabs = findViewById<TabLayout>(R.id.tabs)

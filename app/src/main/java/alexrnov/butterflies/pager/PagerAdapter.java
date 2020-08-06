@@ -16,7 +16,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SubgenusPagerAdapter extends FragmentPagerAdapter {
+public class PagerAdapter extends FragmentPagerAdapter {
 
   @StringRes
   private static final int[] TAB_TITLES = new int[] {R.string.tab1, R.string.tab2,
@@ -24,7 +24,7 @@ public class SubgenusPagerAdapter extends FragmentPagerAdapter {
 
   private final Context context;
 
-  public SubgenusPagerAdapter(Context context, FragmentManager fm) {
+  public PagerAdapter(Context context, FragmentManager fm) {
     super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     this.context = context;
   }
