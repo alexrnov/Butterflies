@@ -9,19 +9,14 @@ import android.app.Application
 class Initialization : Application() {
 
   // Reference to the application graph that is used across the whole app
-  //val appComponent = DaggerApplicationComponent.create()
-
   lateinit var appComponent: ApplicationComponent
 
   override fun onCreate() {
-
     super.onCreate()
 
     // Reference to the application graph that is used across the whole app
     appComponent = DaggerApplicationComponent.builder()
             .networkModule(NetworkModule(this.applicationContext))
             .build()
-
   }
-
 }
