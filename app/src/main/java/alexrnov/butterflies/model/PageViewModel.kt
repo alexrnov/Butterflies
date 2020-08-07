@@ -14,7 +14,7 @@ class PageViewModel @Inject constructor(
 
   // will run only when the returned LiveData is observed. map - Returns a LiveData mapped from
   // the input source LiveData by applying mapFunction to each value set on source.
-  val items = Transformations.map<Int, List<String>>(pageIndex) { index: Int ->
+  val items = Transformations.map<Int, List<ButterflyData>>(pageIndex) { index: Int ->
     repository.loadList(index)
   }
 

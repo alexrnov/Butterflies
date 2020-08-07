@@ -16,7 +16,7 @@ import javax.inject.Singleton
 class Repository @Inject constructor(val context: Context) {
 
   /** invoke from PageViewModel class */
-  fun loadList(pageIndex: Int): List<String> {
+  fun loadList(pageIndex: Int): List<ButterflyData> {
 
     val assetManager: AssetManager = context.assets
     val arrayItems: Array<out String>? = assetManager.list("data/tab${pageIndex + 1}")
@@ -138,7 +138,8 @@ class Repository @Inject constructor(val context: Context) {
       list.add("54")
       list.add("55")
     }
-    return list
+    //return list
+    return returnList
   }
 
 
