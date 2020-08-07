@@ -2,6 +2,7 @@ package alexrnov.butterflies.model
 
 import android.content.Context
 import android.content.res.AssetManager
+import android.graphics.drawable.Drawable
 import android.util.Log
 import java.io.*
 import java.nio.file.Paths
@@ -37,12 +38,16 @@ class Repository @Inject constructor(val context: Context) {
       input = assetManager.open("data/tab${pageIndex + 1}/$item/title_land.txt")
       val titleLand = loadText(input)
 
-      returnList.add(ButterflyData(titlePort, titleLand))
+      input = assetManager.open("data/tab${pageIndex + 1}/$item/small_image.jpg")
+      val smallImage: Drawable = Drawable.createFromStream(input, null)
+
+      returnList.add(ButterflyData(titlePort, titleLand, smallImage))
     }
 
     returnList.forEach { item ->
       Log.i("P", "titlePort = " + item.titlePort)
       Log.i("P", "titleLand = " + item.titleLand)
+      Log.i("P", "smallImage = " + item.smallImage)
       Log.i("P", "----------------------------")
     }
 
