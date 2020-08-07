@@ -1,11 +1,9 @@
 package alexrnov.butterflies.model
 
 import android.content.Context
+import android.content.res.AssetManager
 import android.util.Log
-import java.io.BufferedReader
-import java.io.File
-import java.io.IOException
-import java.io.InputStreamReader
+import java.io.*
 import java.nio.file.Paths
 import java.util.*
 import javax.inject.Inject
@@ -19,7 +17,8 @@ class Repository @Inject constructor(val context: Context) {
   /** invoke from PageViewModel class */
   fun loadList(pageIndex: Int): List<String> {
 
-    val arrayItems: Array<out String>? = context.assets.list("data/tab${pageIndex + 1}")
+    val assetManager: AssetManager = context.assets
+    val arrayItems: Array<out String>? = assetManager.list("data/tab${pageIndex + 1}")
     val listItems: MutableList<String> = arrayItems?.toMutableList()?: ArrayList()
 
     listItems.sortWith(Comparator { s1: String, s2: String ->
@@ -28,10 +27,24 @@ class Repository @Inject constructor(val context: Context) {
       n1.compareTo(n2)
     })
 
+    val returnList:MutableList<ButterflyData> = ArrayList()
+
     listItems.forEach { item ->
-      Log.i("P", "item = $item")
+
+      var input = assetManager.open("data/tab${pageIndex + 1}/$item/title_port.txt")
+      val titlePort = loadText(input)
+
+      input = assetManager.open("data/tab${pageIndex + 1}/$item/title_land.txt")
+      val titleLand = loadText(input)
+
+      returnList.add(ButterflyData(titlePort, titleLand))
     }
 
+    returnList.forEach { item ->
+      Log.i("P", "titlePort = " + item.titlePort)
+      Log.i("P", "titleLand = " + item.titleLand)
+      Log.i("P", "----------------------------")
+    }
 
 
 
@@ -122,5 +135,30 @@ class Repository @Inject constructor(val context: Context) {
     }
     return list
   }
+
+
+
+
+
+  private fun loadText(input: InputStream): String {
+
+    val bf: BufferedReader
+    val result = StringBuilder()
+    try {
+      bf = BufferedReader(InputStreamReader(input))
+      var line = bf.readLine()
+      while (line != null) {
+        result.append(line)
+        result.append(System.getProperty("line.separator"))
+        line = bf.readLine()
+      }
+      Log.i("P", "result = " + result.toString())
+    } catch (e: IOException) {
+      //e.printStackTrace();
+    }
+    return result.toString()
+
+  }
+
 
 }
