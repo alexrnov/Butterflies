@@ -3,9 +3,11 @@ package alexrnov.butterflies.model
 import android.content.Context
 import android.util.Log
 import java.io.BufferedReader
+import java.io.File
 import java.io.IOException
 import java.io.InputStreamReader
-import java.util.ArrayList
+import java.nio.file.Paths
+import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -17,10 +19,23 @@ class Repository @Inject constructor(val context: Context) {
   /** invoke from PageViewModel class */
   fun loadList(pageIndex: Int): List<String> {
 
-    Log.i("P", "con repository = " + context.packageName + " page index = " + pageIndex)
+    val arrayItems: Array<out String>? = context.assets.list("data/tab${pageIndex + 1}")
+    val listItems: MutableList<String> = arrayItems?.toMutableList()?: ArrayList()
 
-    val index = pageIndex + 1
-    val input = context.assets.open("tab$index/item1/description.txt")
+    listItems.sortWith(Comparator { s1: String, s2: String ->
+      val n1 = s1.removeRange(0, 4).toInt()
+      val n2 = s2.removeRange(0, 4).toInt()
+      n1.compareTo(n2)
+    })
+
+    listItems.forEach { item ->
+      Log.i("P", "item = $item")
+    }
+
+
+
+
+    val input = context.assets.open("data/tab${pageIndex + 1}/item1/description.txt")
 
     val bf: BufferedReader
     val result = StringBuilder()
@@ -41,7 +56,7 @@ class Repository @Inject constructor(val context: Context) {
     val list: MutableList<String> = ArrayList()
 
     if (pageIndex == 0) {
-      list.add("0")
+      list.add("150")
       list.add("1")
       list.add("2")
       list.add("3")

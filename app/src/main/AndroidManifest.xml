@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="alexrnov.butterflies">
 
-
     <permission
         android:name="alexrnov.papiliobutterflies.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
@@ -11,6 +10,10 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality.
     -->
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <uses-permission android:name="alexrnov.googlemap.permission.MAPS_RECEIVE"/>
