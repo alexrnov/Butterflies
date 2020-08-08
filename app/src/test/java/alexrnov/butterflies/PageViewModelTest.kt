@@ -37,7 +37,7 @@ class PageViewModelTest {
   @Test
   fun f() {
 
-    val arrayItems: Array<out String>? = arrayOf("item1", "item2", "item3")
+    //val arrayItems: Array<out String>? = arrayOf("item1", "item2", "item3")
     /*
     `when`(assetManager.list(anyString())).thenReturn(arrayItems)
 
@@ -45,6 +45,8 @@ class PageViewModelTest {
     `when`(assetManager.open(anyString())).thenReturn(inputStream)
     `when`(context.assets).thenReturn(assetManager)
 
+    // You don't need Dagger to create an instance of Repository
+    // You can pass a fake or mock Context
     repository = Repository(context)
 
     val list5 = repository.loadList(0)
