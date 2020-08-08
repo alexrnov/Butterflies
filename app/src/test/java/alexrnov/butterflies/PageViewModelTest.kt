@@ -4,20 +4,22 @@ import alexrnov.butterflies.model.ButterflyData
 import alexrnov.butterflies.model.PageViewModel
 import alexrnov.butterflies.model.Repository
 import android.content.Context
+import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.ArgumentMatchers.anyInt
+import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
+import java.io.InputStream
 
 @RunWith(MockitoJUnitRunner::class)
 class PageViewModelTest {
 
-  @Mock
   private lateinit var repository: Repository
 
   @Mock
@@ -26,20 +28,40 @@ class PageViewModelTest {
   @Mock
   private lateinit var context: Context
 
+  @Mock
+  private lateinit var assetManager: AssetManager
+
+  @Mock
+  private lateinit var inputStream: InputStream
+
   @Test
   fun f() {
 
+    val arrayItems: Array<out String>? = arrayOf("item1", "item2", "item3")
+    /*
+    `when`(assetManager.list(anyString())).thenReturn(arrayItems)
+
+    val inputStream =
+    `when`(assetManager.open(anyString())).thenReturn(inputStream)
+    `when`(context.assets).thenReturn(assetManager)
+
+    repository = Repository(context)
+
+    val list5 = repository.loadList(0)
+
+    println("list5 = " + list5.size)
     val list = mutableListOf<ButterflyData>()
     list.add(ButterflyData("port", "land", draw, "", ""))
-    `when`(repository.loadList(anyInt())).thenReturn(list)
-    assertThat(repository.loadList(4)).isEqualTo(list)
+
+
+     */
+    //assertThat(repository.loadList(4)).isEqualTo(list)
 
     // looper error (thread error)
 
-    val pageViewModel = PageViewModel(repository)
-    pageViewModel.setIndex(1)
-    val list2 = pageViewModel.items
-    assertThat(list.size).isEqualTo(list2.value!!.size)
-
+    // val pageViewModel = PageViewModel(repository)
+    // pageViewModel.setIndex(1)
+    // val list2 = pageViewModel.items
+    // assertThat(list.size).isEqualTo(list2.value!!.size)
   }
 }

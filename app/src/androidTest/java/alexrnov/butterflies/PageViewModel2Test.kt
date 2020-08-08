@@ -14,6 +14,9 @@ class PageViewModel2Test {
   var activityRule: ActivityTestRule<MainActivity>
           = ActivityTestRule(MainActivity::class.java)
 
+  //@get:Rule
+  //val instantExecutorRule = InstantTaskExecutorRule()
+
   @Test
   fun f() {
 
