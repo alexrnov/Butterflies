@@ -32,11 +32,8 @@ class ButterfliesAdapter(private val list: List<ButterflyData>,
     val imageView = holder.cardView.findViewById<ImageView>(R.id.imageView)
 
     imageView.setImageDrawable(list[position].smallImage)
-    if (landscape) {
-      textView.text = list[position].titleLand
-    } else {
-      textView.text = list[position].titlePort
-    }
+
+    textView.text = if (landscape) list[position].titleLand else list[position].titlePort
 
     holder.cardView.tag = position
     holder.cardView.isClickable = true
