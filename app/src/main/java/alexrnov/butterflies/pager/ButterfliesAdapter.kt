@@ -2,15 +2,21 @@ package alexrnov.butterflies.pager
 
 import alexrnov.butterflies.R
 import alexrnov.butterflies.model.ButterflyData
+import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
+import javax.inject.Inject
 
-class ButterfliesAdapter(private val list: List<ButterflyData>,
-                         private val landscape: Boolean) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
+class ButterfliesAdapter constructor(
+                         private val list: List<ButterflyData>,
+                         private val landscape: Boolean,
+                         private val fragmentActivity: FragmentActivity?) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
 
   // Provide a reference to the views for each data item. Complex data items may need more than one
   // view per item, and you provide access to all the views for a data item in a view holder.
@@ -37,6 +43,12 @@ class ButterfliesAdapter(private val list: List<ButterflyData>,
 
     holder.cardView.tag = position
     holder.cardView.isClickable = true
+
+
+    holder.cardView.setOnClickListener { view ->
+      Log.i("P", "click = " + list[position].titleLand)
+      Log.i("P", "name pack = " + fragmentActivity?.applicationContext?.packageName)
+    }
   }
 
   // return the size of your dataset (invoked by the layout manager)

@@ -97,7 +97,7 @@ public class PageContentFragment extends Fragment {
     recyclerView.setLayoutManager(layoutManager);
 
     pageViewModel.getItems().observe(this, items -> {
-      adapter = new ButterfliesAdapter(items, landscape);
+      adapter = new ButterfliesAdapter(items, landscape, getActivity());
       recyclerView.setAdapter(adapter);
     });
 
