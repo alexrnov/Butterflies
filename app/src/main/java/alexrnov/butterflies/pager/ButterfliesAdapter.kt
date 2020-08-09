@@ -9,7 +9,8 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 
-class ButterfliesAdapter(private val list: List<ButterflyData>) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
+class ButterfliesAdapter(private val list: List<ButterflyData>,
+                         private val landscape: Boolean) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
 
   // Provide a reference to the views for each data item. Complex data items may need more than one
   // view per item, and you provide access to all the views for a data item in a view holder.
@@ -31,7 +32,11 @@ class ButterfliesAdapter(private val list: List<ButterflyData>) : RecyclerView.A
     val imageView = holder.cardView.findViewById<ImageView>(R.id.imageView)
 
     imageView.setImageDrawable(list[position].smallImage)
-    textView.text = list[position].titlePort
+    if (landscape) {
+      textView.text = list[position].titlePort
+    } else {
+      textView.text = list[position].titleLand
+    }
 
     holder.cardView.tag = position
     holder.cardView.isClickable = true

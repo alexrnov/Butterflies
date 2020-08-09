@@ -2,6 +2,7 @@ package alexrnov.butterflies.pager;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,9 @@ import alexrnov.butterflies.model.PageViewModel;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView.LayoutManager;
 
 /** A content fragment containing a view fo current page */
 public class PageContentFragment extends Fragment {
@@ -27,6 +30,8 @@ public class PageContentFragment extends Fragment {
 
   private RecyclerView recyclerView;
   private ButterfliesAdapter adapter;
+
+  private Boolean landscape = false;
 
   public static PageContentFragment newInstance(int index) {
     PageContentFragment fragment = new PageContentFragment();
@@ -54,6 +59,14 @@ public class PageContentFragment extends Fragment {
   @Override
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+
+    Context context = getContext();
+    if (context != null) {
+      landscape = context.getResources().getBoolean(R.bool.is_landscape);
+    }
+
+    Log.i("P", "landscape orientation = " + landscape);
+
     //pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class); // is deprecated
     //pageViewModel = new ViewModelProvider(this).get(PageViewModel.class); // in case, when di don't use
     int index = 1;
@@ -73,11 +86,18 @@ public class PageContentFragment extends Fragment {
     // use this setting to improve performance if you know that changes
     // in content do not change the layout size of the RecyclerView
     recyclerView.setHasFixedSize(true);
-    // GridLayoutManager arranges the items in a many-dimensional list
-    recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 4));
+
+    LayoutManager layoutManager;
+    if (landscape) {
+      // GridLayoutManager arranges the items in a many-dimensional list
+      layoutManager = new GridLayoutManager(getActivity(), 4);
+    } else {
+      layoutManager = new LinearLayoutManager(getActivity());
+    }
+    recyclerView.setLayoutManager(layoutManager);
 
     pageViewModel.getItems().observe(this, items -> {
-      adapter = new ButterfliesAdapter(items);
+      adapter = new ButterfliesAdapter(items, landscape);
       recyclerView.setAdapter(adapter);
     });
 
