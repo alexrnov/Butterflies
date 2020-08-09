@@ -42,24 +42,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     map = googleMap;
     map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
-    LatLng sydney = new LatLng(40, 10);
-    map.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-    map.addMarker(new MarkerOptions().position(new LatLng(68, 114)));
-    map.addMarker(new MarkerOptions().position(new LatLng(-40,-40)));
-
-    map.addMarker(new MarkerOptions().position(new LatLng(0, -30))).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-    map.addMarker(new MarkerOptions().position(new LatLng(0, -10))).setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
-    //map.addMarker(new MarkerOptions().position(new LatLng(10, 10)).title("Marker in Sydney").snippet("Population: 4,137,400")).setIcon(BitmapDescriptorFactory.fromResource(R.drawable.map_pic1));
-
-    List<ButterflyPoint> list = MapsData.f();
+    List<ButterflyPoint> list = MapsData.INSTANCE.getPoints();
     for (ButterflyPoint point: list) {
       map.addMarker(new MarkerOptions().position(point.getLatLng())
               .title(point.getTitle())
               .snippet(point.getSnippet()))
               .setIcon(BitmapDescriptorFactory.fromAsset(point.getSrcIcon()));
     }
-    map.addMarker(new MarkerOptions().position(new LatLng(10, 10)).title("Marker in Sydney").snippet("Population: 4,137,400")).setIcon(BitmapDescriptorFactory.fromAsset("map/cacicus.png"));
-
-    map.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(10,0)));
   }
 }
