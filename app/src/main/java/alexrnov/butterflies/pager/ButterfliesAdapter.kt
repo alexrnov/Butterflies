@@ -33,9 +33,9 @@ class ButterfliesAdapter(private val list: List<ButterflyData>,
 
     imageView.setImageDrawable(list[position].smallImage)
     if (landscape) {
-      textView.text = list[position].titlePort
-    } else {
       textView.text = list[position].titleLand
+    } else {
+      textView.text = list[position].titlePort
     }
 
     holder.cardView.tag = position
