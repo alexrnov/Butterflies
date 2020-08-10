@@ -7,12 +7,16 @@ import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
 import alexrnov.butterflies.model.Repository
 import android.content.Intent
+import android.content.res.AssetManager
+import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import javax.inject.Inject
@@ -53,6 +57,20 @@ class DetailsActivity : AppCompatActivity() {
 
     val linkImage =intent.getStringExtra("linkBigImage")
     val linkDescription = intent.getStringExtra("linkDescription")
+
+    val assetManager: AssetManager = baseContext.assets
+
+    val bigImage: ImageView = findViewById(R.id.big_image)
+
+    var input = assetManager.open(linkImage)
+    val smallImage: Drawable = Drawable.createFromStream(input, null)
+
+    input = assetManager.open(linkDescription)
+    val text = repository.loadText(input)
+    val textView: TextView = findViewById(R.id.description_text)
+    textView.text = text
+
+    bigImage.setImageDrawable(smallImage)
 
     repository.print()
     Log.i("P", "linkImage = " + linkImage)

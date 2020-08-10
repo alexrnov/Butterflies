@@ -49,7 +49,7 @@ class Repository @Inject constructor(val context: Context) {
     return returnList
   }
 
-  private fun loadText(input: InputStream): String {
+  fun loadText(input: InputStream): String {
     val bf: BufferedReader
     val result = StringBuilder()
     try {
