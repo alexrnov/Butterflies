@@ -46,22 +46,10 @@ class Repository @Inject constructor(val context: Context) {
               "data/tab${pageIndex + 1}/$item/description.txt")
       returnList.add(butterflyData)
     }
-
-    returnList.forEach { item ->
-      Log.i("P", "titlePort = " + item.titlePort)
-      Log.i("P", "titleLand = " + item.titleLand)
-      Log.i("P", "smallImage = " + item.smallImage)
-      Log.i("P", "----------------------------")
-    }
     return returnList
   }
 
-
-
-
-
   private fun loadText(input: InputStream): String {
-
     val bf: BufferedReader
     val result = StringBuilder()
     try {
@@ -72,13 +60,14 @@ class Repository @Inject constructor(val context: Context) {
         result.append(System.getProperty("line.separator"))
         line = bf.readLine()
       }
-      Log.i("P", "result = " + result.toString())
     } catch (e: IOException) {
       //e.printStackTrace();
     }
     return result.toString()
-
   }
 
+  fun print() {
+    println("print from repository")
+  }
 
 }

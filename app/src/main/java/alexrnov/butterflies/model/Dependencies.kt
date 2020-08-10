@@ -2,6 +2,7 @@ package alexrnov.butterflies.model
 
 import alexrnov.butterflies.pager.PageContentFragment
 import alexrnov.butterflies.MainActivity
+import alexrnov.butterflies.details.DetailsActivity
 import android.content.Context
 import dagger.Component
 import dagger.Module
@@ -76,5 +77,6 @@ interface ActivityComponent {
    */
   fun inject(activity: MainActivity)
   fun inject(pageContentFragment: PageContentFragment)
+  fun inject(detailsActivity: DetailsActivity)
 }
 

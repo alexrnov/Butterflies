@@ -33,9 +33,9 @@ class MainActivity : AppCompatActivity() {
   // When using activities, inject Dagger in the activity's onCreate() method
   // before calling super.onCreate() to avoid issues with fragment restoration.
   override fun onCreate(savedInstanceState: Bundle?) {
-    // Creation of the login graph using the application graph
+    // creation of the login graph using the application graph
     activityComponent = (applicationContext as Initialization).applicationComponent.activityComponent().create()
-    // Make Dagger instantiate @Inject fields in MainActivity
+    // make Dagger instantiate @Inject fields in MainActivity
     activityComponent.inject(this)
 
     super.onCreate(savedInstanceState)
