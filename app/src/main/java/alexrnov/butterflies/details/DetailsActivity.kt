@@ -9,5 +9,11 @@ class DetailsActivity : AppCompatActivity() {
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setContentView(R.layout.activity_details)
+
+    val linkImage =intent.getStringExtra("linkBigImage")
+    val linkDescription = intent.getStringExtra("linkDescription")
+
+    Log.i("P", "linkImage = " + linkImage)
+    Log.i("P", "limkDescription = " + linkDescription)
   }
 }

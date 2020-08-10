@@ -1,10 +1,13 @@
 package alexrnov.butterflies.pager
 
 import alexrnov.butterflies.R
+import alexrnov.butterflies.details.DetailsActivity
 import alexrnov.butterflies.model.ButterflyData
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -13,10 +16,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import javax.inject.Inject
 
-class ButterfliesAdapter constructor(
-                         private val list: List<ButterflyData>,
-                         private val landscape: Boolean,
-                         private val fragmentActivity: FragmentActivity?) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
+class ButterfliesAdapter constructor(private val list: List<ButterflyData>,
+                         private val landscape: Boolean) : RecyclerView.Adapter<ButterfliesAdapter.CardViewHolder>() {
 
   // Provide a reference to the views for each data item. Complex data items may need more than one
   // view per item, and you provide access to all the views for a data item in a view holder.
@@ -46,8 +47,13 @@ class ButterfliesAdapter constructor(
 
 
     holder.cardView.setOnClickListener { view ->
-      Log.i("P", "click = " + list[position].titleLand)
-      Log.i("P", "name pack = " + fragmentActivity?.applicationContext?.packageName)
+      val context = view.context
+      val intent = Intent(view.context, DetailsActivity::class.java)
+
+      intent.putExtra("linkBigImage", list[position].linkBigImage)
+      intent.putExtra("linkDescription", list[position].linkDescription)
+
+      context.startActivity(intent)
     }
   }
 
