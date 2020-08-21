@@ -1,4 +1,4 @@
-package alexrnov.butterflies.model
+package alexrnov.butterflies.pager
 
 import android.graphics.drawable.Drawable
 

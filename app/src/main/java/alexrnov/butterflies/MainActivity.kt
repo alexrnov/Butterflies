@@ -2,7 +2,7 @@ package alexrnov.butterflies
 
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
-import alexrnov.butterflies.model.PageViewModel
+import alexrnov.butterflies.pager.PageViewModel
 import alexrnov.butterflies.pager.PagerAdapter
 import android.content.Intent
 import android.os.Bundle

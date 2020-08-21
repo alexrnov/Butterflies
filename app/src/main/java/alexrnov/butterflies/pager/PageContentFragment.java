@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import alexrnov.butterflies.MainActivity;
 import alexrnov.butterflies.R;
-import alexrnov.butterflies.model.PageViewModel;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -96,7 +95,7 @@ public class PageContentFragment extends Fragment {
     }
     recyclerView.setLayoutManager(layoutManager);
 
-    pageViewModel.getItems().observe(this, items -> {
+    pageViewModel.getItems().observe(getViewLifecycleOwner(), items -> {
       adapter = new ButterfliesAdapter(items, landscape);
       recyclerView.setAdapter(adapter);
     });

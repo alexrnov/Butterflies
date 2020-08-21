@@ -1,19 +1,13 @@
 package alexrnov.butterflies
 
-import alexrnov.butterflies.model.ButterflyData
-import alexrnov.butterflies.model.PageViewModel
 import alexrnov.butterflies.model.Repository
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
 
-import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.ArgumentMatchers.anyInt
-import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
 import org.mockito.junit.MockitoJUnitRunner
 import java.io.InputStream
 

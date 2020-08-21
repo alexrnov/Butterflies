@@ -1,11 +1,10 @@
 package alexrnov.butterflies.model
 
+import alexrnov.butterflies.pager.ButterflyData
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
-import android.util.Log
 import java.io.*
-import java.nio.file.Paths
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton

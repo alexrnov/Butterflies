@@ -1,5 +1,6 @@
-package alexrnov.butterflies.model
+package alexrnov.butterflies.pager
 
+import alexrnov.butterflies.model.Repository
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel

@@ -25,6 +25,8 @@ class DetailsActivity : AppCompatActivity() {
 
   @Inject lateinit var repository: Repository
 
+  @Inject lateinit var detailsViewModel: DetailsViewModel
+
   private lateinit var activityComponent: ActivityComponent
 
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,6 +77,7 @@ class DetailsActivity : AppCompatActivity() {
     repository.print()
     Log.i("P", "linkImage = " + linkImage)
     Log.i("P", "limkDescription = " + linkDescription)
+    detailsViewModel.f()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
