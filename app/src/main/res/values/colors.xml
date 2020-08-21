@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#538d5f</color>
+    <color name="colorPrimary">#7cc38b</color>
     <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#ffffff</color>
+    <color name="colorAccent">#f3f1c8</color>
 
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
-    <color name="selectTabTitle">#ffffff</color>
-    <color name="defaultTabTitle">#e8e8e8</color>
+    <color name="selectTabTitle">#f3f1c8</color>
+    <color name="defaultTabTitle">#9c9c9c</color>
 
 </resources>
 
