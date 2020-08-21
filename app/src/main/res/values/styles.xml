@@ -8,9 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-
-
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -20,16 +17,9 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
-
-
-
     <style name="TextMenu" parent = "@android:style/TextAppearance">
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">#000000</item>
     </style>
-
-
-
-
 
 </resources>
