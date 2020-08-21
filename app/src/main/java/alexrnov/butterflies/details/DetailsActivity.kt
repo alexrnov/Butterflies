@@ -19,6 +19,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.lifecycle.Observer
 import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
@@ -28,6 +29,8 @@ class DetailsActivity : AppCompatActivity() {
   @Inject lateinit var detailsViewModel: DetailsViewModel
 
   private lateinit var activityComponent: ActivityComponent
+
+  private var detailsText: TextView? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     // creation of the login graph using the application graph
@@ -68,16 +71,25 @@ class DetailsActivity : AppCompatActivity() {
     val smallImage: Drawable = Drawable.createFromStream(input, null)
 
     input = assetManager.open(linkDescription)
-    val text = repository.loadText(input)
-    val textView: TextView = findViewById(R.id.description_text)
-    textView.text = text
+    //val text = repository.loadText(input)
+
+    detailsText = findViewById(R.id.description_text)
+
+    // Create the observer which updates the UI.
+    val textObserver: Observer<String> = Observer { text ->
+      detailsText?.text = text ?: ""
+    }
+
+    detailsViewModel.getDetailsText().observe(this, textObserver)
+    detailsViewModel.loadDetailsText(input)
+
+    //detailsText?.text = text
 
     bigImage.setImageDrawable(smallImage)
 
     repository.print()
     Log.i("P", "linkImage = " + linkImage)
     Log.i("P", "limkDescription = " + linkDescription)
-    detailsViewModel.f()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

@@ -4,6 +4,7 @@ import alexrnov.butterflies.pager.ButterflyData
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
+import android.util.Log
 import java.io.*
 import java.util.*
 import javax.inject.Inject
@@ -49,6 +50,7 @@ class Repository @Inject constructor(val context: Context) {
   }
 
   fun loadText(input: InputStream): String {
+    Log.i("P", "loadText = P")
     val bf: BufferedReader
     val result = StringBuilder()
     try {
