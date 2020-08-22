@@ -67,6 +67,10 @@ class Repository @Inject constructor(val context: Context) {
     return result.toString()
   }
 
+  fun loadImage(input: InputStream): Drawable {
+    return Drawable.createFromStream(input, null)
+  }
+
   fun print() {
     println("print from repository")
   }

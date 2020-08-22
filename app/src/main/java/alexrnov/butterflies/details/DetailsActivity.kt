@@ -1,11 +1,9 @@
 package alexrnov.butterflies.details
 
 import alexrnov.butterflies.Initialization
-import alexrnov.butterflies.MainActivity
 import alexrnov.butterflies.R
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
-import alexrnov.butterflies.model.Repository
 import android.content.Intent
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
