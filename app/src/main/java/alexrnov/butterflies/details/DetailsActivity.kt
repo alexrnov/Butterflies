@@ -20,17 +20,15 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.Observer
+import java.io.InputStream
 import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
-
-  @Inject lateinit var repository: Repository
-
+  private lateinit var activityComponent: ActivityComponent
   @Inject lateinit var detailsViewModel: DetailsViewModel
 
-  private lateinit var activityComponent: ActivityComponent
-
   private var detailsText: TextView? = null
+  private var bigImage: ImageView? = null
 
   override fun onCreate(savedInstanceState: Bundle?) {
     // creation of the login graph using the application graph
@@ -60,36 +58,31 @@ class DetailsActivity : AppCompatActivity() {
       }
     }
 
-    val linkImage =intent.getStringExtra("linkBigImage")
+    bigImage = findViewById(R.id.big_image)
+    detailsText = findViewById(R.id.description_text)
+
+    /* Create the observer which updates the UI */
+    val imageObserver: Observer<Drawable> = Observer { bigImage?.setImageDrawable(it) }
+    detailsViewModel.getBigImage().observe(this, imageObserver)
+
+    val textObserver: Observer<String> = Observer { detailsText?.text = it ?: "" }
+    detailsViewModel.getDetailsText().observe(this, textObserver)
+
+    val linkImage = intent.getStringExtra("linkBigImage")
     val linkDescription = intent.getStringExtra("linkDescription")
 
     val assetManager: AssetManager = baseContext.assets
+    var input: InputStream
 
-    val bigImage: ImageView = findViewById(R.id.big_image)
-
-    var input = assetManager.open(linkImage)
-    val smallImage: Drawable = Drawable.createFromStream(input, null)
-
-    input = assetManager.open(linkDescription)
-    //val text = repository.loadText(input)
-
-    detailsText = findViewById(R.id.description_text)
-
-    // Create the observer which updates the UI.
-    val textObserver: Observer<String> = Observer { text ->
-      detailsText?.text = text ?: ""
+    if (linkImage != null) {
+      input = assetManager.open(linkImage)
+      detailsViewModel.loadBigImage(input)
     }
 
-    detailsViewModel.getDetailsText().observe(this, textObserver)
-    detailsViewModel.loadDetailsText(input)
-
-    //detailsText?.text = text
-
-    bigImage.setImageDrawable(smallImage)
-
-    repository.print()
-    Log.i("P", "linkImage = " + linkImage)
-    Log.i("P", "limkDescription = " + linkDescription)
+    if (linkDescription != null) {
+      input = assetManager.open(linkDescription)
+      detailsViewModel.loadDetailsText(input)
+    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
