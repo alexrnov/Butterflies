@@ -2,6 +2,7 @@ package alexrnov.butterflies.details
 
 import alexrnov.butterflies.Initialization
 import alexrnov.butterflies.R
+import alexrnov.butterflies.databinding.ActivityDetailsBinding
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
 import android.content.Intent
@@ -18,6 +19,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Observer
 import java.io.InputStream
 import javax.inject.Inject
@@ -39,9 +41,12 @@ class DetailsActivity : AppCompatActivity() {
 
     super.onCreate(savedInstanceState)
 
-    //val binding: DetailsActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_details)
+    val binding: ActivityDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_details)
+    binding.lifecycleOwner = this
+    binding.viewmodel = detailsViewModel
 
-    setContentView(R.layout.activity_details)
+    
+    //setContentView(R.layout.activity_details)
 
     val toolbar = findViewById<Toolbar>(R.id.detailsAppToolbar)
     setSupportActionBar(toolbar)
