@@ -120,7 +120,8 @@ dependencies {
 
 
     //kapt "com.android.databinding:compiler:4.0.1"
-    kapt "com.android.databinding:compiler:3.2.0-alpha10"
+    //kapt "com.android.databinding:compiler:3.2.0-alpha10"
+    //kapt "com.android.databinding:compiler:3.1.3"
 
 
 
@@ -202,6 +203,6 @@ configurations {
     //androidTestImplementation.exclude module: 'checker-qual'
 }
 
-kapt {
-    generateStubs = true
-}
+//kapt {
+   // generateStubs = true
+//}
