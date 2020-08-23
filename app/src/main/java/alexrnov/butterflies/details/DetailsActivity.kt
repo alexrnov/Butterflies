@@ -72,8 +72,8 @@ class DetailsActivity : AppCompatActivity() {
     val imageObserver: Observer<Drawable> = Observer { bigImage?.setImageDrawable(it) }
     detailsViewModel.getBigImage().observe(this, imageObserver)
 
-    val textObserver: Observer<String> = Observer { detailsText?.text = it ?: "" }
-    detailsViewModel.getDetailsText().observe(this, textObserver)
+    //val textObserver: Observer<String> = Observer { detailsText?.text = it ?: "" }
+    //detailsViewModel.getDetailsText().observe(this, textObserver)
 
     val linkImage = intent.getStringExtra("linkBigImage")
     val linkDescription = intent.getStringExtra("linkDescription")
