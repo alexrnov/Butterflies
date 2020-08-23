@@ -41,12 +41,11 @@ class DetailsActivity : AppCompatActivity() {
 
     super.onCreate(savedInstanceState)
 
+    // use data binding
     val binding: ActivityDetailsBinding = DataBindingUtil.setContentView(this, R.layout.activity_details)
     binding.lifecycleOwner = this
     binding.viewmodel = detailsViewModel
-
-    
-    //setContentView(R.layout.activity_details)
+    //setContentView(R.layout.activity_details) // when the data binding is not using
 
     val toolbar = findViewById<Toolbar>(R.id.detailsAppToolbar)
     setSupportActionBar(toolbar)
@@ -68,28 +67,19 @@ class DetailsActivity : AppCompatActivity() {
     bigImage = findViewById(R.id.big_image)
     detailsText = findViewById(R.id.description_text)
 
-    /* Create the observer which updates the UI */
-    val imageObserver: Observer<Drawable> = Observer { bigImage?.setImageDrawable(it) }
-    detailsViewModel.getBigImage().observe(this, imageObserver)
-
+    /* Create the observer which updates the UI (when data binding not used) */
+    //val imageObserver: Observer<Drawable> = Observer { bigImage?.setImageDrawable(it) }
+    //detailsViewModel.getBigImage().observe(this, imageObserver)
     //val textObserver: Observer<String> = Observer { detailsText?.text = it ?: "" }
     //detailsViewModel.getDetailsText().observe(this, textObserver)
 
-    val linkImage = intent.getStringExtra("linkBigImage")
-    val linkDescription = intent.getStringExtra("linkDescription")
-
     val assetManager: AssetManager = baseContext.assets
-    var input: InputStream
 
-    if (linkImage != null) {
-      input = assetManager.open(linkImage)
-      detailsViewModel.loadBigImage(input)
-    }
+    val linkImage = intent.getStringExtra("linkBigImage")
+    linkImage?.let { detailsViewModel.loadBigImage(assetManager.open(it)) }
 
-    if (linkDescription != null) {
-      input = assetManager.open(linkDescription)
-      detailsViewModel.loadDetailsText(input)
-    }
+    val linkDescription = intent.getStringExtra("linkDescription")
+    linkDescription?.let { detailsViewModel.loadDetailsText(assetManager.open(it)) }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
