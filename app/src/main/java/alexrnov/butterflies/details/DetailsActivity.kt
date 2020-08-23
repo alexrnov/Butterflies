@@ -17,6 +17,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import java.io.InputStream
 import javax.inject.Inject
@@ -37,6 +38,9 @@ class DetailsActivity : AppCompatActivity() {
     activityComponent.inject(this)
 
     super.onCreate(savedInstanceState)
+
+    //val binding: DetailsActivityBinding = DataBindingUtil.setContentView(this, R.layout.activity_details)
+
     setContentView(R.layout.activity_details)
 
     val toolbar = findViewById<Toolbar>(R.id.detailsAppToolbar)
