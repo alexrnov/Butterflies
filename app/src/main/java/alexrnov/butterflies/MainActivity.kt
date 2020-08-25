@@ -6,6 +6,7 @@ import alexrnov.butterflies.pager.PageViewModel
 import alexrnov.butterflies.pager.PagerAdapter
 import android.content.Intent
 import android.os.Bundle
+import android.os.SystemClock
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -14,7 +15,11 @@ import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
 import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -32,7 +37,13 @@ class MainActivity : AppCompatActivity() {
   // LoginComponent is created in the activity's onCreate() method, and it'll get implicitly destroyed when the activity gets destroyed.
   lateinit var activityComponent: ActivityComponent
 
-  var result: String? = null
+  private val disposable = CompositeDisposable()
+  private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<String?> ->
+    SystemClock.sleep(3000) // simulate delay
+    emitter.onNext("five")
+    emitter.onComplete()
+  }
+
   // When using activities, inject Dagger in the activity's onCreate() method
   // before calling super.onCreate() to avoid issues with fragment restoration.
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,37 +62,11 @@ class MainActivity : AppCompatActivity() {
     val toolbar = findViewById<Toolbar>(R.id.appToolbar)
     setSupportActionBar(toolbar)
 
-    val subgenusPagerAdapter = PagerAdapter(this, supportFragmentManager)
+    val pagerAdapter = PagerAdapter(this, supportFragmentManager)
     val viewPager = findViewById<ViewPager>(R.id.view_pager)
-    viewPager.adapter = subgenusPagerAdapter
+    viewPager.adapter = pagerAdapter
     val tabs = findViewById<TabLayout>(R.id.tabs)
     tabs.setupWithViewPager(viewPager)
-
-
-    val todoObservable: Observable<String> = Observable.create { emitter ->
-      try {
-        val todos: List<String> = ArrayList()
-        for (todo in todos) {
-          emitter.onNext(todo)
-        }
-        emitter.onComplete()
-      } catch (e: Exception) {
-        emitter.onError(e)
-      }
-    }
-
-    //todoObservable.subscribe { s: String? -> result = s}
-
-    val disposable: Disposable = todoObservable.subscribe { s ->
-      Log.i("P", "s result = " + s)
-    }
-
-    disposable.dispose()
-
-    Log.i("P", "result = $result")
-
-
-
 
   }
 
@@ -95,6 +80,15 @@ class MainActivity : AppCompatActivity() {
     return when (item.itemId) {
       R.id.action_about -> {
         Log.i("P", "about")
+
+        val subscribe: Disposable = serverDownloadObservable.observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe { i ->
+                  // update interface
+                  Log.i("P", "Shedule = $i")
+                }
+        disposable.add(subscribe)
+
         true
       }
       R.id.action_map -> {
@@ -107,6 +101,16 @@ class MainActivity : AppCompatActivity() {
         true
       }
       else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    Log.i("P", "onDestroy() invoke")
+    // to prevent a possible (temporary) memory leak (used onDestroy() or onStop() methods)
+    if (!disposable.isDisposed) {
+      // dispose the subscription when not interested in the emitted data any more
+      disposable.dispose()
     }
   }
 
