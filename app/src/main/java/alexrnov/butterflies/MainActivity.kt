@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
 
   private val disposable = CompositeDisposable()
   private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<String?> ->
-    SystemClock.sleep(3000) // simulate delay
+    SystemClock.sleep(1) // simulate delay
     emitter.onNext("five")
     emitter.onComplete()
   }
@@ -89,6 +89,8 @@ class MainActivity : AppCompatActivity() {
                 }
         disposable.add(subscribe)
 
+        val aboutDialog = AboutDialogFragment()
+        aboutDialog.show(this.supportFragmentManager, "tag")
         true
       }
       R.id.action_map -> {

@@ -17,4 +17,11 @@
     <string name="tab6">Pterourus Scopoli</string>
     <string name="tab7">Sinoprinceps Hancock</string>
 
+    <!-- about program alert dialog -->
+    <string name="about_program_category">About</string>
+    <string name="ok_button">OK</string>
+    <string name="app_bar_about_descript">app_bar_about_descript</string>
+    <string name="about_icon_descript">icon_des_descript</string>
+    <string name="about_program_text">text</string>
+
 </resources>

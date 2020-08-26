@@ -7,6 +7,8 @@
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
 
+    <color name="background">#ebfff4</color>
+
     <color name="selectTabTitle">#ffffff</color>
     <color name="defaultTabTitle">#9c9c9c</color>
 </resources>
