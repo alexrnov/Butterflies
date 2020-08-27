@@ -3,17 +3,17 @@
 
     <item android:id="@+id/action_about"
         android:title="@string/about_icon"
-        android:icon="@drawable/about_icon"
+        android:icon="@drawable/icon_about"
         app:showAsAction="ifRoom"/>
 
     <item android:id="@+id/action_map"
         android:title="@string/map_icon"
-        android:icon="@drawable/map_icon"
+        android:icon="@drawable/icon_map"
         app:showAsAction="ifRoom"
         />
 
     <item android:id="@+id/action_settings"
         android:title="@string/tune_icon"
-        android:icon="@drawable/tune_icon"
+        android:icon="@drawable/icon_tune"
         app:showAsAction="ifRoom"/>
 </menu>

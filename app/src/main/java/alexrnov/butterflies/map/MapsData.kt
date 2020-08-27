@@ -8,41 +8,41 @@ internal object MapsData {
   fun getPoints(): List<ButterflyPoint> {
     val butterflies = ArrayList<ButterflyPoint>()
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "agestor", "place 1", "map/agestor.png"))
+    butterflies.add(ButterflyPoint(LatLng(30.0, 71.0),
+            "agestor", "Pakistan", "map/agestor.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(10.0, 10.0),
-            "alexanor", "southern swallowtail", "map/alexanor.png"))
+    butterflies.add(ButterflyPoint(LatLng(42.0, 22.0),
+            "alexanor", "Balkans", "map/alexanor.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(100.0, 00.0),
-            "antimachus", "place 3", "map/antimachus.png"))
+    butterflies.add(ButterflyPoint(LatLng(1.0, 13.0),
+            "antimachus", "west Africa", "map/antimachus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(150.0, 40.0),
-            "arcturus", "place 4", "map/arcturus.png"))
+    butterflies.add(ButterflyPoint(LatLng(23.0, 80.0),
+            "arcturus", "Indian", "map/arcturus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(30.0, 20.0),
-            "astyalus", "place 5", "map/astyalus.png"))
+    butterflies.add(ButterflyPoint(LatLng(-26.0, -62.0),
+            "astyalus", "Argentina", "map/astyalus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 30.0),
-            "bachus", "place 6", "map/bachus.png"))
+    butterflies.add(ButterflyPoint(LatLng(6.0, -64.0),
+            "bachus", "Venezuela", "map/bachus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, -20.0),
-            "benguetanus", "place 7", "map/benguetanus.png"))
+    butterflies.add(ButterflyPoint(LatLng(13.0, -121.0),
+            "benguetanus", "Philippines", "map/benguetanus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(-20.0, 20.0),
-            "brevicauda", "place 8", "map/brevicauda.png"))
+    butterflies.add(ButterflyPoint(LatLng(48.5, -56.0),
+            "brevicauda", "Newfoundland", "map/brevicauda.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "bridgei", "place 9", "map/bridgei.png"))
+    butterflies.add(ButterflyPoint(LatLng(-9.6, 160.0),
+            "bridgei", "Solomons Islands", "map/bridgei.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "cacicus", "place 10", "map/cacicus.png"))
+    butterflies.add(ButterflyPoint(LatLng(-11.0, -73.0),
+            "cacicus", "Peru", "map/cacicus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "caiguanabus", "place 11", "map/caiguanabus.png"))
+    butterflies.add(ButterflyPoint(LatLng(21.0, -77.0),
+            "caiguanabus", "Cuba", "map/caiguanabus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "chiansiades", "place 12", "map/chiansiades.png"))
+    butterflies.add(ButterflyPoint(LatLng(1.0, -60.0),
+            "chiansiades", "South America", "map/chiansiades.png"))
 
     butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
             "chikae", "place 13", "map/chikae.png"))
