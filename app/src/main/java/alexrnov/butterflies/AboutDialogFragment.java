@@ -2,7 +2,6 @@ package alexrnov.butterflies;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -31,8 +30,8 @@ public class AboutDialogFragment extends DialogFragment {
     AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, R.style.AboutDialogStyle));
 
     //LayoutInflater inflater = activity.getLayoutInflater();
-    //View v = inflater.inflate(R.layout.about_dialog, null);
-    View v = View.inflate(getContext(), R.layout.about_dialog, null);
+    //View v = inflater.inflate(R.layout.fragment_about_dialog, null);
+    View v = View.inflate(getContext(), R.layout.fragment_about_dialog, null);
     builder.setView(v);
     /* // add action buttons when used standard alert dialog buttons
     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
