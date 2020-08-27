@@ -26,7 +26,7 @@ internal object MapsData {
     butterflies.add(ButterflyPoint(LatLng(6.0, -64.0),
             "bachus", "Venezuela", "map/bachus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(13.0, -121.0),
+    butterflies.add(ButterflyPoint(LatLng(13.0, 121.0),
             "benguetanus", "Philippines", "map/benguetanus.png"))
 
     butterflies.add(ButterflyPoint(LatLng(48.5, -56.0),
