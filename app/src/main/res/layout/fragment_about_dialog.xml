@@ -98,18 +98,21 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_check"
             android:text="Button"
+            style="?android:attr/borderlessButtonStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ecology_button"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- remove click shadow: style="?android:attr/borderlessButtonStyle-->
         <Button
             android:id="@+id/ecology_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_default"
             android:text="Button"
+            style="?android:attr/borderlessButtonStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

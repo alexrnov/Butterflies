@@ -20,10 +20,14 @@ class AboutDialogFragment : DialogFragment() {
 
   private val descriptionClickListener = View.OnClickListener { v: View? ->
     Log.i("P", "description click")
+    descriptionButton?.setBackgroundResource(R.drawable.button_check)
+    ecologyButton?.setBackgroundResource(R.drawable.button_default)
   }
 
   private val ecologyClickListener = View.OnClickListener { v: View? ->
     Log.i("P", "ecology click")
+    ecologyButton?.setBackgroundResource(R.drawable.button_check)
+    descriptionButton?.setBackgroundResource(R.drawable.button_default)
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
