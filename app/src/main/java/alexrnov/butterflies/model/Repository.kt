@@ -50,7 +50,6 @@ class Repository @Inject constructor(val context: Context) {
   }
 
   fun loadText(input: InputStream): String {
-    Log.i("P", "loadText = P")
     val bf: BufferedReader
     val result = StringBuilder()
     try {

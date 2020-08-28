@@ -115,7 +115,6 @@ class MainActivity : AppCompatActivity() {
       disposable.dispose()
     }
   }
-
 }
 
 
