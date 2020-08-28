@@ -1,46 +1,47 @@
-package alexrnov.butterflies;
+package alexrnov.butterflies
 
-import android.app.Dialog;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.app.Dialog
+import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Button
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.fragment.app.DialogFragment
 
-import org.jetbrains.annotations.NotNull;
+class AboutDialogFragment : DialogFragment() {
+  private var descriptionButton: Button? = null
+  private var ecologyButton: Button? = null
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.view.ContextThemeWrapper;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.FragmentActivity;
+  private val backClickListener = View.OnClickListener { v: View? ->
+    val dialog = this@AboutDialogFragment.dialog
+    dialog?.cancel()
+  }
 
-public class AboutDialogFragment extends DialogFragment {
+  private val descriptionClickListener = View.OnClickListener { v: View? ->
+    Log.i("P", "description click")
+  }
 
-  private View.OnClickListener clickListener = v -> {
-    Dialog dialog = AboutDialogFragment.this.getDialog();
-    if (dialog != null) {
-      dialog.cancel();
-    }
-  };
+  private val ecologyClickListener = View.OnClickListener { v: View? ->
+    Log.i("P", "ecology click")
+  }
 
-  @NotNull
-  @Override
-  public Dialog onCreateDialog(Bundle savedInstanceState) {
-    FragmentActivity activity = this.requireActivity();
+  override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    val activity = requireActivity()
     // this announcement causes a test error
-    //AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-    AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(activity, R.style.AboutDialogStyle));
+    val builder = AlertDialog.Builder(ContextThemeWrapper(activity, R.style.AboutDialogStyle))
 
-    //LayoutInflater inflater = activity.getLayoutInflater();
-    //View v = inflater.inflate(R.layout.fragment_about_dialog, null);
-    View v = View.inflate(getContext(), R.layout.fragment_about_dialog, null);
-    builder.setView(v);
-    /* // add action buttons when used standard alert dialog buttons
-    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {}});
-    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int id) {}});
-    */
-    Button button = v.findViewById(R.id.close_dialog_button);
-    if (button != null) button.setOnClickListener(clickListener);
-    return builder.create();
+    val v = View.inflate(context, R.layout.fragment_about_dialog, null)
+    builder.setView(v)
+    val closeButton = v.findViewById<Button>(R.id.close_dialog_button)
+    closeButton?.setOnClickListener(backClickListener)
+
+    descriptionButton = v.findViewById<Button>(R.id.description_button)
+    descriptionButton?.setOnClickListener(descriptionClickListener)
+
+    ecologyButton = v.findViewById<Button>(R.id.ecology_button)
+    ecologyButton?.setOnClickListener(ecologyClickListener)
+
+    return builder.create()
   }
 }
