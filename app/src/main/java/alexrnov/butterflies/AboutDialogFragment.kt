@@ -34,7 +34,7 @@ class AboutDialogFragment : DialogFragment() {
   private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<String?> ->
     // simulate delay
     val assetManager: AssetManager? = this.context?.assets
-    val input: InputStream? = assetManager?.open("data/tab1/item1/title_land.txt")
+    val input: InputStream? = assetManager?.open("about/description.txt")
     val s: String = input?.let { loadText(it) } ?: ""
     emitter.onNext(s)
     emitter.onComplete()
@@ -81,7 +81,7 @@ class AboutDialogFragment : DialogFragment() {
     return builder.create()
   }
 
-  fun loadText(input: InputStream): String {
+  private fun loadText(input: InputStream): String {
     Log.i("P", "loadText = P")
     val bf: BufferedReader
     val result = StringBuilder()
