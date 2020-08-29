@@ -135,7 +135,7 @@ internal object MapsData {
             "saharae", "Arabia", "map/saharae.png"))
 
     butterflies.add(ButterflyPoint(LatLng(-17.0, -44.0),
-            "scamander", "south-eastern Brazil", "map/scamanderpng"))
+            "scamander", "south-eastern Brazil", "map/scamander.png"))
 
     butterflies.add(ButterflyPoint(LatLng(19.0, -90.0),
             "torquatus", "Mexico", "map/torquatus.png"))
@@ -154,8 +154,6 @@ internal object MapsData {
 
     butterflies.add(ButterflyPoint(LatLng(46.5, -115.5),
             "zelicaon", "western North America", "map/zelicaon.png"))
-
-
 
     return butterflies
   }
