@@ -15,11 +15,13 @@ import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
+import io.reactivex.internal.util.NotificationLite.disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+
 
 class AboutDialogFragment : DialogFragment() {
   private var descriptionButton: Button? = null
@@ -31,33 +33,65 @@ class AboutDialogFragment : DialogFragment() {
     dialog?.cancel()
   }
 
-  private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<String?> ->
-    // simulate delay
-    val assetManager: AssetManager? = this.context?.assets
-    val input: InputStream? = assetManager?.open("about/description.txt")
-    val s: String = input?.let { loadText(it) } ?: ""
-    emitter.onNext(s)
-    emitter.onComplete()
+  // define a potentially long running operation via the following observable
+  private val descriptionObservable = Observable.create { emitter: ObservableEmitter<String?> ->
+    try {
+      val assetManager: AssetManager? = this.context?.assets
+      val input: InputStream? = assetManager?.open("about/description.txt")
+      val s: String = input?.let { loadText(it) } ?: "" // load text with delay
+      emitter.onNext(s)
+      emitter.onComplete()
+    } catch (e: IOException) {
+      emitter.onNext("error")
+      emitter.onComplete()
+      //emitter.onError(e)
+    }
   }
 
-  private val disposable = CompositeDisposable()
+  var ecologyObservable = Observable.just { emitter: ObservableEmitter<String?> ->
+    try {
+      val assetManager: AssetManager? = this.context?.assets
+      val input: InputStream? = assetManager?.open("about/ecology.txt")
+      val s: String = input?.let { loadText(it) } ?: "" // load text with delay
+      emitter.onNext(s)
+      emitter.onComplete()
+    } catch (e: IOException) {
+      emitter.onNext("error")
+      emitter.onComplete()
+      //emitter.onError(e)
+    }
+  }
+
+  private val compositeDisposable = CompositeDisposable()
 
   private val descriptionClickListener = View.OnClickListener { v: View? ->
-    descriptionButton?.setBackgroundResource(R.drawable.button_check)
-    ecologyButton?.setBackgroundResource(R.drawable.button_default)
-
-    val subscribe: Disposable = serverDownloadObservable.observeOn(AndroidSchedulers.mainThread())
+    // subscribe to this observable. This triggers its execution and provide the subscribe
+    // with the required information. mainThread() - the subscriber observes in the main
+    // thread. Schedulers.io() - observable is called outside the main thread
+    val subscribe: Disposable = descriptionObservable.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe { text ->
+            .subscribe { text: String? ->
               textView?.text = text // update interface
+              descriptionButton?.setBackgroundResource(R.drawable.button_check)
+              ecologyButton?.setBackgroundResource(R.drawable.button_default)
             }
 
-    disposable.add(subscribe)
+    compositeDisposable.add(subscribe)
   }
 
   private val ecologyClickListener = View.OnClickListener { v: View? ->
-    ecologyButton?.setBackgroundResource(R.drawable.button_check)
-    descriptionButton?.setBackgroundResource(R.drawable.button_default)
+    /*
+    val subscribe: Disposable = ecologyObservable.subscribe { text: String? ->
+      textView?.text = text // update interface
+      ecologyButton?.setBackgroundResource(R.drawable.button_check)
+      descriptionButton?.setBackgroundResource(R.drawable.button_default)
+    }
+
+    val disposable5 = ecologyObservable.subscribe { colors ->
+      textView?.setStrings(colors)
+    }
+
+     */
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -81,21 +115,26 @@ class AboutDialogFragment : DialogFragment() {
     return builder.create()
   }
 
+  @Throws(IOException::class)
   private fun loadText(input: InputStream): String {
-    Log.i("P", "loadText = P")
-    val bf: BufferedReader
     val result = StringBuilder()
-    try {
-      bf = BufferedReader(InputStreamReader(input))
-      var line = bf.readLine()
-      while (line != null) {
-        result.append(line)
-        result.append(System.getProperty("line.separator"))
-        line = bf.readLine()
-      }
-    } catch (e: IOException) {
-      //e.printStackTrace();
+    val bf = BufferedReader(InputStreamReader(input))
+    var line = bf.readLine()
+    while (line != null) {
+      result.append(line)
+      result.append(System.getProperty("line.separator"))
+      line = bf.readLine()
     }
     return result.toString()
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    Log.i("P", "onDestroy() invoke")
+    // to prevent a possible (temporary) memory leak (used onDestroy() or onStop() methods)
+    if (!compositeDisposable.isDisposed) {
+      // dispose the subscription when not interested in the emitted data any more
+      compositeDisposable.dispose()
+    }
   }
 }
