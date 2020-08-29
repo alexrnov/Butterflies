@@ -44,29 +44,77 @@ internal object MapsData {
     butterflies.add(ButterflyPoint(LatLng(1.0, -60.0),
             "chiansiades", "South America", "map/chiansiades.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "chikae", "place 13", "map/chikae.png"))
+    butterflies.add(ButterflyPoint(LatLng(18.0, 121.5),
+            "chikae", "Philippines", "map/chikae.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "chrapkowskii", "place 14", "map/chrapkowskii.png"))
+    butterflies.add(ButterflyPoint(LatLng(1.41, 32.0),
+            "chrapkowskii", "Uganda", "map/chrapkowskii.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "cynorta", "place 15", "map/cynorta.png"))
+    butterflies.add(ButterflyPoint(LatLng(8.88, -12.0),
+            "cynorta", "Sierra Leone", "map/cynorta.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "deiphobus", "place 16", "map/deiphobus.png"))
+    butterflies.add(ButterflyPoint(LatLng(-3.0, 128.0),
+            "deiphobus", "Mollucas", "map/deiphobus.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "delalandei", "place 17", "map/delalandei.png"))
+    butterflies.add(ButterflyPoint(LatLng(-19.0, 46.0),
+            "delalandei", "Madagascar", "map/delalandei.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "echerioides", "place 18", "map/echerioides.png"))
+    butterflies.add(ButterflyPoint(LatLng(7.0, 27.0),
+            "echerioides", "Sub-Saharan Africa", "map/echerioides.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "epiphorbas", "place 19", "map/epiphorbas.png"))
+    butterflies.add(ButterflyPoint(LatLng(-12.22, 44.45),
+            "epiphorbas", "Comoro Islands", "map/epiphorbas.png"))
 
-    butterflies.add(ButterflyPoint(LatLng(20.0, 20.0),
-            "euterpinus", "place 20", "map/euterpinus.png"))
+    butterflies.add(ButterflyPoint(LatLng(-2.0, -77.0),
+            "euterpinus", "Ecuador", "map/euterpinus.png"))
+
+
+
+
+    butterflies.add(ButterflyPoint(LatLng(9.0, 9.0),
+            "gallienus", "Nigeria", "map/gallienus.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(12.40, 31.0),
+            "hesperus", "Sudan", "map/hesperus.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(18.15, -77.5),
+            "homerus", "Jamaica", "map/homerus.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(43.5, -122.0),
+            "indra", "western North American", "map/indra.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(47.0, -108.0),
+            "joanae", "North American", "map/joanae.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "laglaizei", "", "map/laglaizei.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "maackii", "", "map/maackii.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "machaon", "", "map/machaon.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "manlius", "", "map/manlius.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "menatius", "", "map/menatius.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "morondavana", "", "map/morondavana.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "ophidicephalus", "", "map/ophidicephalus.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "ornythion", "", "map/ornythion.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "paeon", "", "map/paeon.png"))
+
+    butterflies.add(ButterflyPoint(LatLng(0.0, 0.0),
+            "paradoxa", "", "map/paradoxa.png"))
 
 
     return butterflies
