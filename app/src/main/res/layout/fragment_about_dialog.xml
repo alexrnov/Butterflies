@@ -54,50 +54,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/about_app_bar">
 
-        <!--
-        <RadioGroup
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/radio_group_background"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_selector"
-                android:checked="true"
-                android:button="@null"
-                android:text="description"
-                android:paddingLeft="20dp"
-                android:paddingTop="15dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="15dp"/>
-
-            <RadioButton
-                android:id="@+id/radioButton2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/radio_selector"
-                android:button="@null"
-                android:text="ecology"
-                android:paddingLeft="20dp"
-                android:paddingTop="15dp"
-                android:paddingRight="20dp"
-                android:paddingBottom="15dp"/>
-
-        </RadioGroup>
-       -->
         <Button
             android:id="@+id/description_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_check"
-            android:text="Button"
+            android:text="@string/description_button_title"
             style="?android:attr/borderlessButtonStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/ecology_button"
@@ -111,7 +73,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@drawable/button_default"
-            android:text="Button"
+            android:text="@string/ecology_button_title"
             style="?android:attr/borderlessButtonStyle"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +111,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/about_program_text"
                 android:textAlignment="center"
                 android:textSize="18sp"
                 app:layout_constraintBottom_toBottomOf="parent"

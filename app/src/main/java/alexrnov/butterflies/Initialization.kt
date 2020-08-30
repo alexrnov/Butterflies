@@ -19,4 +19,10 @@ class Initialization : Application() {
             .applicationModule(ApplicationModule(this.applicationContext))
             .build()
   }
+
+  companion object {
+    /** Flag to determine which button to click when creating a dialog (open, rotate) */
+    @JvmStatic
+    var checkFirstButtonDialog = true
+  }
 }

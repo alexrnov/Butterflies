@@ -1,5 +1,6 @@
 package alexrnov.butterflies
 
+import alexrnov.butterflies.Initialization.Companion.checkFirstButtonDialog
 import android.app.Dialog
 import android.content.res.AssetManager
 import android.os.Bundle
@@ -26,8 +27,6 @@ class AboutDialogFragment : DialogFragment() {
   private var descriptionButton: Button? = null
   private var ecologyButton: Button? = null
   private var textView: TextView? = null
-  private var source: String = ""
-
 
   private val backClickListener = View.OnClickListener {
     val dialog = this@AboutDialogFragment.dialog
@@ -36,38 +35,25 @@ class AboutDialogFragment : DialogFragment() {
 
   // define a potentially long running operation via the following observable
   private val descriptionObservable = Observable.create { emitter: ObservableEmitter<String?> ->
-    try {
-      val assetManager: AssetManager? = this.context?.assets
-      val input: InputStream? = assetManager?.open("about/description.txt")
-      val s: String = input?.let { loadText(it) } ?: "" // load text with delay
-      emitter.onNext(s)
-      emitter.onComplete()
-    } catch (e: IOException) {
-      emitter.onNext("error")
-      emitter.onComplete()
-      //emitter.onError(e)
-    }
+    val assetManager: AssetManager? = this.context?.assets
+    val input: InputStream? = assetManager?.open("about/description.txt")
+    val s: String = input?.let { loadText(it) } ?: "" // load text with delay
+    emitter.onNext(s)
+    emitter.onComplete()
   }
 
   // define a potentially long running operation via the following observable
   private val ecologyObservable = Observable.create { emitter: ObservableEmitter<String?> ->
-    try {
-      val assetManager: AssetManager? = this.context?.assets
-      val input: InputStream? = assetManager?.open("about/ecology.txt")
-      val s: String = input?.let { loadText(it) } ?: "" // load text with delay
-      emitter.onNext(s)
-      emitter.onComplete()
-    } catch (e: IOException) {
-      emitter.onNext("error")
-      emitter.onComplete()
-      //emitter.onError(e)
-    }
+    val assetManager: AssetManager? = this.context?.assets
+    val input: InputStream? = assetManager?.open("about/ecology.txt")
+    val s: String = input?.let { loadText(it) } ?: "" // load text with delay
+    emitter.onNext(s)
+    emitter.onComplete()
   }
 
   private val compositeDisposable = CompositeDisposable()
 
-  private val descriptionClickListener = View.OnClickListener { v: View? ->
-    source = "about/description.txt"
+  private val descriptionClickListener = View.OnClickListener {
     // subscribe to this observable. This triggers its execution and provide the subscribe
     // with the required information. mainThread() - the subscriber observes in the main
     // thread. Schedulers.io() - observable is called outside the main thread
@@ -75,29 +61,27 @@ class AboutDialogFragment : DialogFragment() {
             .subscribeOn(Schedulers.io())
             .subscribe { text: String? ->
               textView?.text = text // update interface
-              descriptionButton?.setBackgroundResource(R.drawable.button_check)
+              it?.setBackgroundResource(R.drawable.button_check)
               ecologyButton?.setBackgroundResource(R.drawable.button_default)
+              checkFirstButtonDialog = true
             }
-
     compositeDisposable.add(subscribe)
   }
 
-  private val ecologyClickListener = View.OnClickListener { v: View? ->
-
-    //source = "about/ecology.txt"
-
+  private val ecologyClickListener = View.OnClickListener {
     val subscribe: Disposable = ecologyObservable.observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribe { text: String? ->
               textView?.text = text // update interface
-              ecologyButton?.setBackgroundResource(R.drawable.button_check)
+              it?.setBackgroundResource(R.drawable.button_check)
               descriptionButton?.setBackgroundResource(R.drawable.button_default)
+              checkFirstButtonDialog = false
             }
-
     compositeDisposable.add(subscribe)
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+    Log.i("P", "onCreateDialog()")
     val activity = requireActivity()
     // this announcement causes a test error
     val builder = AlertDialog.Builder(ContextThemeWrapper(activity, R.style.AboutDialogStyle))
@@ -111,32 +95,34 @@ class AboutDialogFragment : DialogFragment() {
     descriptionButton = v.findViewById(R.id.description_button)
     descriptionButton?.setOnClickListener(descriptionClickListener)
 
-    descriptionButton?.performClick()
-
     ecologyButton = v.findViewById(R.id.ecology_button)
     ecologyButton?.setOnClickListener(ecologyClickListener)
 
     textView = v.findViewById(R.id.information_textView)
+
+    /* define which a button to click when creating a dialog (open, rotate) */
+    if (checkFirstButtonDialog) descriptionButton?.performClick()
+    else ecologyButton?.performClick()
+
     return builder.create()
   }
 
-  @Throws(IOException::class)
   private fun loadText(input: InputStream): String {
-    Log.i("P", "load text")
     val result = StringBuilder()
-    val bf = BufferedReader(InputStreamReader(input))
-    var line = bf.readLine()
-    while (line != null) {
-      result.append(line)
-      result.append(System.getProperty("line.separator"))
-      line = bf.readLine()
-    }
+    try {
+      val bf = BufferedReader(InputStreamReader(input))
+      var line = bf.readLine()
+      while (line != null) {
+        result.append(line)
+        result.append(System.getProperty("line.separator"))
+        line = bf.readLine()
+      }
+    } catch (e: IOException) {}
     return result.toString()
   }
 
   override fun onDestroy() {
     super.onDestroy()
-    Log.i("P", "onDestroy() invoke")
     // to prevent a possible (temporary) memory leak (used onDestroy() or onStop() methods)
     if (!compositeDisposable.isDisposed) {
       // dispose the subscription when not interested in the emitted data any more

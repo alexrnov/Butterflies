@@ -22,6 +22,7 @@
     <string name="ok_button">OK</string>
     <string name="app_bar_about_descript">app_bar_about_descript</string>
     <string name="about_icon_descript">icon_des_descript</string>
-    <string name="about_program_text">text</string>
+    <string name="description_button_title">Description</string>
+    <string name="ecology_button_title">Ecology</string>
 
 </resources>
