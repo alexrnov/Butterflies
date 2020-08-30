@@ -15,7 +15,6 @@ import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.internal.util.NotificationLite.disposable
 import io.reactivex.schedulers.Schedulers
 import java.io.BufferedReader
 import java.io.IOException
@@ -27,6 +26,8 @@ class AboutDialogFragment : DialogFragment() {
   private var descriptionButton: Button? = null
   private var ecologyButton: Button? = null
   private var textView: TextView? = null
+  private var source: String = ""
+
 
   private val backClickListener = View.OnClickListener {
     val dialog = this@AboutDialogFragment.dialog
@@ -48,7 +49,8 @@ class AboutDialogFragment : DialogFragment() {
     }
   }
 
-  var ecologyObservable = Observable.just { emitter: ObservableEmitter<String?> ->
+  // define a potentially long running operation via the following observable
+  private val ecologyObservable = Observable.create { emitter: ObservableEmitter<String?> ->
     try {
       val assetManager: AssetManager? = this.context?.assets
       val input: InputStream? = assetManager?.open("about/ecology.txt")
@@ -65,6 +67,7 @@ class AboutDialogFragment : DialogFragment() {
   private val compositeDisposable = CompositeDisposable()
 
   private val descriptionClickListener = View.OnClickListener { v: View? ->
+    source = "about/description.txt"
     // subscribe to this observable. This triggers its execution and provide the subscribe
     // with the required information. mainThread() - the subscriber observes in the main
     // thread. Schedulers.io() - observable is called outside the main thread
@@ -80,18 +83,18 @@ class AboutDialogFragment : DialogFragment() {
   }
 
   private val ecologyClickListener = View.OnClickListener { v: View? ->
-    /*
-    val subscribe: Disposable = ecologyObservable.subscribe { text: String? ->
-      textView?.text = text // update interface
-      ecologyButton?.setBackgroundResource(R.drawable.button_check)
-      descriptionButton?.setBackgroundResource(R.drawable.button_default)
-    }
 
-    val disposable5 = ecologyObservable.subscribe { colors ->
-      textView?.setStrings(colors)
-    }
+    //source = "about/ecology.txt"
 
-     */
+    val subscribe: Disposable = ecologyObservable.observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())
+            .subscribe { text: String? ->
+              textView?.text = text // update interface
+              ecologyButton?.setBackgroundResource(R.drawable.button_check)
+              descriptionButton?.setBackgroundResource(R.drawable.button_default)
+            }
+
+    compositeDisposable.add(subscribe)
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -108,6 +111,8 @@ class AboutDialogFragment : DialogFragment() {
     descriptionButton = v.findViewById(R.id.description_button)
     descriptionButton?.setOnClickListener(descriptionClickListener)
 
+    descriptionButton?.performClick()
+
     ecologyButton = v.findViewById(R.id.ecology_button)
     ecologyButton?.setOnClickListener(ecologyClickListener)
 
@@ -117,6 +122,7 @@ class AboutDialogFragment : DialogFragment() {
 
   @Throws(IOException::class)
   private fun loadText(input: InputStream): String {
+    Log.i("P", "load text")
     val result = StringBuilder()
     val bf = BufferedReader(InputStreamReader(input))
     var line = bf.readLine()
