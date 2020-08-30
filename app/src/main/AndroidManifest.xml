@@ -3,7 +3,7 @@
     package="alexrnov.butterflies">
 
     <permission
-        android:name="alexrnov.papiliobutterflies.permission.MAPS_RECEIVE"
+        android:name="alexrnov.butterflies.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use

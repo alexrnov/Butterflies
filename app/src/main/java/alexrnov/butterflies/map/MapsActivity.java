@@ -40,11 +40,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
    */
   @Override
   public void onMapReady(GoogleMap googleMap) {
+    Log.i("P", "onMapReady");
     map = googleMap;
     map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
-    List<ButterflyPoint> list = MapsData.INSTANCE.getPoints();
-    for (ButterflyPoint point: list) {
+    List<ButterflyPoint> points = MapsData.INSTANCE.getPoints();
+
+    for (ButterflyPoint point: points) {
       map.addMarker(new MarkerOptions().position(point.getLatLng())
               .title(point.getTitle())
               .snippet(point.getSnippet()))
