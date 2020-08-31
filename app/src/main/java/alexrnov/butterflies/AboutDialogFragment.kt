@@ -10,6 +10,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
@@ -61,8 +62,12 @@ class AboutDialogFragment : DialogFragment() {
             .subscribeOn(Schedulers.io())
             .subscribe { text: String? ->
               textView?.text = text // update interface
-              it?.setBackgroundResource(R.drawable.button_check)
+              descriptionButton?.setBackgroundResource(R.drawable.button_check)
+              descriptionButton?.setTextColor(ContextCompat.getColor(
+                      requireContext(), R.color.selectTabTitle))
               ecologyButton?.setBackgroundResource(R.drawable.button_default)
+              ecologyButton?.setTextColor(ContextCompat.getColor(
+                      requireContext(), R.color.defaultTabTitle))
               checkFirstButtonDialog = true
             }
     compositeDisposable.add(subscribe)
@@ -73,8 +78,12 @@ class AboutDialogFragment : DialogFragment() {
             .subscribeOn(Schedulers.io())
             .subscribe { text: String? ->
               textView?.text = text // update interface
-              it?.setBackgroundResource(R.drawable.button_check)
+              ecologyButton?.setBackgroundResource(R.drawable.button_check)
+              ecologyButton?.setTextColor(ContextCompat.getColor(
+                      requireContext(), R.color.selectTabTitle))
               descriptionButton?.setBackgroundResource(R.drawable.button_default)
+              descriptionButton?.setTextColor(ContextCompat.getColor(
+                      requireContext(), R.color.defaultTabTitle))
               checkFirstButtonDialog = false
             }
     compositeDisposable.add(subscribe)

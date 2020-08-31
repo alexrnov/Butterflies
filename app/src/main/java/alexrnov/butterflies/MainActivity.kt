@@ -37,13 +37,6 @@ class MainActivity : AppCompatActivity() {
   // LoginComponent is created in the activity's onCreate() method, and it'll get implicitly destroyed when the activity gets destroyed.
   lateinit var activityComponent: ActivityComponent
 
-  private val disposable = CompositeDisposable()
-  private val serverDownloadObservable = Observable.create { emitter: ObservableEmitter<String?> ->
-    SystemClock.sleep(1) // simulate delay
-    emitter.onNext("five")
-    emitter.onComplete()
-  }
-
   // When using activities, inject Dagger in the activity's onCreate() method
   // before calling super.onCreate() to avoid issues with fragment restoration.
   override fun onCreate(savedInstanceState: Bundle?) {
@@ -79,16 +72,6 @@ class MainActivity : AppCompatActivity() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.action_about -> {
-        Log.i("P", "about")
-
-        val subscribe: Disposable = serverDownloadObservable.observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .subscribe { i ->
-                  // update interface
-                  Log.i("P", "Shedule = $i")
-                }
-        disposable.add(subscribe)
-
         val aboutDialog = AboutDialogFragment()
         aboutDialog.show(this.supportFragmentManager, "tag")
         true
@@ -99,20 +82,9 @@ class MainActivity : AppCompatActivity() {
         true
       }
       R.id.action_settings -> {
-        Log.i("P", "settings")
         true
       }
       else -> super.onOptionsItemSelected(item)
-    }
-  }
-
-  override fun onDestroy() {
-    super.onDestroy()
-    Log.i("P", "onDestroy() invoke")
-    // to prevent a possible (temporary) memory leak (used onDestroy() or onStop() methods)
-    if (!disposable.isDisposed) {
-      // dispose the subscription when not interested in the emitted data any more
-      disposable.dispose()
     }
   }
 }

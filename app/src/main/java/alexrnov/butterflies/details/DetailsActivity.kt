@@ -1,5 +1,6 @@
 package alexrnov.butterflies.details
 
+import alexrnov.butterflies.AboutDialogFragment
 import alexrnov.butterflies.Initialization
 import alexrnov.butterflies.R
 import alexrnov.butterflies.databinding.ActivityDetailsBinding
@@ -91,7 +92,8 @@ class DetailsActivity : AppCompatActivity() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.action_about -> {
-        Log.i("P", "about")
+        val aboutDialog = AboutDialogFragment()
+        aboutDialog.show(this.supportFragmentManager, "tag")
         true
       }
       R.id.action_map -> {
@@ -100,7 +102,6 @@ class DetailsActivity : AppCompatActivity() {
         true
       }
       R.id.action_settings -> {
-        Log.i("P", "settings")
         true
       }
       else -> super.onOptionsItemSelected(item)
