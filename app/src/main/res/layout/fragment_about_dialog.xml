@@ -1,5 +1,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -82,12 +83,14 @@
     <ScrollView
         android:id="@+id/about_app_text_constrain"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
 
+        android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="8dp"
         android:fadeScrollbars="true"
         android:fadingEdgeLength="50dp"
         android:requiresFadingEdge="vertical"
@@ -105,8 +108,8 @@
 
             <TextView
                 android:id="@+id/information_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:gravity="center"
                 android:textAlignment="center"
                 android:textSize="18sp"
@@ -121,6 +124,7 @@
         android:id="@+id/close_dialog_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@drawable/back_button_toggle"
         android:paddingLeft="15dp"

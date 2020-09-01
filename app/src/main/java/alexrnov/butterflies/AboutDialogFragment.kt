@@ -2,10 +2,13 @@ package alexrnov.butterflies
 
 import alexrnov.butterflies.Initialization.Companion.checkFirstButtonDialog
 import android.app.Dialog
+import android.content.Context
 import android.content.res.AssetManager
+import android.graphics.Point
 import android.os.Bundle
-import android.util.Log
 import android.view.View
+import android.view.Window
+import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
@@ -90,13 +93,48 @@ class AboutDialogFragment : DialogFragment() {
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    Log.i("P", "onCreateDialog()")
     val activity = requireActivity()
     // this announcement causes a test error
     val builder = AlertDialog.Builder(ContextThemeWrapper(activity, R.style.AboutDialogStyle))
 
+
     val v = View.inflate(context, R.layout.fragment_about_dialog, null)
-    builder.setView(v)
+    //builder.setView(v)
+
+
+    //val d: Dialog = builder.setView(v).create()
+
+
+    val d = Dialog(requireActivity())
+    //  d.getWindow().setBackgroundDrawable(R.color.action_bar_bg);
+    d.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    d.setContentView(v)
+
+
+    val wm = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
+    val display = wm.defaultDisplay // getting the screen size of device
+    val size = Point()
+    display.getSize(size)
+    val width = size.x - 150 // Set your heights
+    val height = size.y - 150 // set your widths
+    val lp = WindowManager.LayoutParams()
+    lp.copyFrom(d.window!!.attributes)
+    lp.width = width
+    lp.height = height
+    d.show()
+    d.getWindow()?.setAttributes(lp)
+
+/*
+    val lp = WindowManager.LayoutParams()
+    lp.copyFrom(d.getWindow()?.getAttributes())
+    lp.width = WindowManager.LayoutParams.MATCH_PARENT
+    lp.height = WindowManager.LayoutParams.MATCH_PARENT
+    d.show()
+    d.getWindow()?.setAttributes(lp)
+
+
+ */
+
 
     val closeButton = v.findViewById<Button>(R.id.close_dialog_button)
     closeButton?.setOnClickListener(backClickListener)
@@ -113,7 +151,7 @@ class AboutDialogFragment : DialogFragment() {
     if (checkFirstButtonDialog) descriptionButton?.performClick()
     else ecologyButton?.performClick()
 
-    return builder.create()
+    return d
   }
 
   private fun loadText(input: InputStream): String {
@@ -137,5 +175,11 @@ class AboutDialogFragment : DialogFragment() {
       // dispose the subscription when not interested in the emitted data any more
       compositeDisposable.dispose()
     }
+  }
+
+  override fun onResume() {
+    super.onResume()
+
+
   }
 }
