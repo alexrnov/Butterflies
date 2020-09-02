@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Point
 import android.os.Bundle
+import android.util.Log
 import android.view.Display
 import android.view.View
 import android.view.Window
@@ -94,18 +95,16 @@ class AboutDialogFragment : DialogFragment() {
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val activity: FragmentActivity = requireActivity()
-
+    val fragmentActivity = requireActivity()
     val v = View.inflate(context, R.layout.fragment_about_dialog, null)
-
-    val dialog = Dialog(activity)
+    val dialog = Dialog(fragmentActivity)
     dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
     dialog.setContentView(v)
 
-    val wm = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
+    val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
 
     val display = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-      activity.display
+      fragmentActivity.display
     } else {
       wm.defaultDisplay // deprecated in API 30
     }
@@ -113,9 +112,8 @@ class AboutDialogFragment : DialogFragment() {
     val size = Point()
     display?.getSize(size)
 
-
-    val width = size.x - 150
-    val height = size.y - 150
+    val width = size.x - 50
+    val height = size.y - 50
     val lp = WindowManager.LayoutParams()
     lp.copyFrom(dialog.window?.attributes)
     lp.width = width
