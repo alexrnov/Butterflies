@@ -9,7 +9,7 @@ android {
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "alexrnov.butterflies"
-        minSdkVersion 15
+        minSdkVersion 21
         // To maintain your application along with each Android release, you should increase the value of this attribute
         // to match the latest API level, then thoroughly test your application on the corresponding platform version.
         targetSdkVersion 30

@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Point
 import android.os.Bundle
+import android.view.Display
 import android.view.View
 import android.view.Window
 import android.view.WindowManager
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,7 +27,6 @@ import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
-
 
 class AboutDialogFragment : DialogFragment() {
   private var descriptionButton: Button? = null
@@ -93,48 +94,34 @@ class AboutDialogFragment : DialogFragment() {
   }
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-    val activity = requireActivity()
-    // this announcement causes a test error
-    val builder = AlertDialog.Builder(ContextThemeWrapper(activity, R.style.AboutDialogStyle))
-
+    val activity: FragmentActivity = requireActivity()
 
     val v = View.inflate(context, R.layout.fragment_about_dialog, null)
-    //builder.setView(v)
 
+    val dialog = Dialog(activity)
+    dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+    dialog.setContentView(v)
 
-    //val d: Dialog = builder.setView(v).create()
+    val wm = activity.getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
 
+    val display = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+      activity.display
+    } else {
+      wm.defaultDisplay // deprecated in API 30
+    }
 
-    val d = Dialog(requireActivity())
-    //  d.getWindow().setBackgroundDrawable(R.color.action_bar_bg);
-    d.requestWindowFeature(Window.FEATURE_NO_TITLE)
-    d.setContentView(v)
-
-
-    val wm = requireActivity().getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
-    val display = wm.defaultDisplay // getting the screen size of device
     val size = Point()
-    display.getSize(size)
-    val width = size.x - 150 // Set your heights
-    val height = size.y - 150 // set your widths
+    display?.getSize(size)
+
+
+    val width = size.x - 150
+    val height = size.y - 150
     val lp = WindowManager.LayoutParams()
-    lp.copyFrom(d.window!!.attributes)
+    lp.copyFrom(dialog.window?.attributes)
     lp.width = width
     lp.height = height
-    d.show()
-    d.getWindow()?.setAttributes(lp)
-
-/*
-    val lp = WindowManager.LayoutParams()
-    lp.copyFrom(d.getWindow()?.getAttributes())
-    lp.width = WindowManager.LayoutParams.MATCH_PARENT
-    lp.height = WindowManager.LayoutParams.MATCH_PARENT
-    d.show()
-    d.getWindow()?.setAttributes(lp)
-
-
- */
-
+    dialog.show()
+    dialog.window?.attributes = lp
 
     val closeButton = v.findViewById<Button>(R.id.close_dialog_button)
     closeButton?.setOnClickListener(backClickListener)
@@ -151,7 +138,7 @@ class AboutDialogFragment : DialogFragment() {
     if (checkFirstButtonDialog) descriptionButton?.performClick()
     else ecologyButton?.performClick()
 
-    return d
+    return dialog
   }
 
   private fun loadText(input: InputStream): String {
