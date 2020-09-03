@@ -5,19 +5,18 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.Point
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.Display
+import android.util.Size
 import android.view.View
 import android.view.Window
+import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.FragmentActivity
 import io.reactivex.Observable
 import io.reactivex.ObservableEmitter
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -103,23 +102,51 @@ class AboutDialogFragment : DialogFragment() {
 
     val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
 
+    /*
     val display = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
       fragmentActivity.display
     } else {
       wm.defaultDisplay // deprecated in API 30
     }
+    */
+    val width: Int
+    val height: Int
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      val windowMetrics = wm.currentWindowMetrics
+      val windowInsets: WindowInsets = windowMetrics.windowInsets
 
-    val size = Point()
-    display?.getSize(size)
+      val insets = windowInsets.getInsetsIgnoringVisibility(
+              WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+      val insetsWidth = insets.right + insets.left
+      val insetsHeight = insets.top + insets.bottom
 
-    val width = size.x - 50
-    val height = size.y - 50
+      val b = windowMetrics.bounds
+      val legacySize = Size(b.width() - insetsWidth,
+              b.height() - insetsHeight)
+
+      width = legacySize.width - 50
+      height = legacySize.height - 50
+    } else {
+      val size = Point()
+      val display = wm.defaultDisplay // deprecated in API 30
+      display?.getSize(size)
+      width = size.x - 50
+      height = size.y - 50
+    }
+
+    //Log.i("P", "size.x = " + size.x + "size.y = " + size.y)
+
+    //val width = size.x - 50
+    //val height = size.y - 50
     val lp = WindowManager.LayoutParams()
     lp.copyFrom(dialog.window?.attributes)
     lp.width = width
     lp.height = height
     dialog.show()
     dialog.window?.attributes = lp
+
+
+
 
     val closeButton = v.findViewById<Button>(R.id.close_dialog_button)
     closeButton?.setOnClickListener(backClickListener)
