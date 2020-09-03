@@ -101,52 +101,14 @@ class AboutDialogFragment : DialogFragment() {
     dialog.setContentView(v)
 
     val wm = fragmentActivity.getSystemService(Context.WINDOW_SERVICE) as WindowManager // for activity use context instead of getActivity()
+    val (width, height) = getDialogSize(wm)
 
-    /*
-    val display = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-      fragmentActivity.display
-    } else {
-      wm.defaultDisplay // deprecated in API 30
-    }
-    */
-    val width: Int
-    val height: Int
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-      val windowMetrics = wm.currentWindowMetrics
-      val windowInsets: WindowInsets = windowMetrics.windowInsets
-
-      val insets = windowInsets.getInsetsIgnoringVisibility(
-              WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
-      val insetsWidth = insets.right + insets.left
-      val insetsHeight = insets.top + insets.bottom
-
-      val b = windowMetrics.bounds
-      val legacySize = Size(b.width() - insetsWidth,
-              b.height() - insetsHeight)
-
-      width = legacySize.width - 50
-      height = legacySize.height - 50
-    } else {
-      val size = Point()
-      val display = wm.defaultDisplay // deprecated in API 30
-      display?.getSize(size)
-      width = size.x - 50
-      height = size.y - 50
-    }
-
-    //Log.i("P", "size.x = " + size.x + "size.y = " + size.y)
-
-    //val width = size.x - 50
-    //val height = size.y - 50
     val lp = WindowManager.LayoutParams()
     lp.copyFrom(dialog.window?.attributes)
     lp.width = width
     lp.height = height
     dialog.show()
     dialog.window?.attributes = lp
-
-
-
 
     val closeButton = v.findViewById<Button>(R.id.close_dialog_button)
     closeButton?.setOnClickListener(backClickListener)
@@ -189,9 +151,31 @@ class AboutDialogFragment : DialogFragment() {
     }
   }
 
-  override fun onResume() {
-    super.onResume()
+  private fun getDialogSize(wm: WindowManager): Pair<Int, Int> {
+    var width: Int
+    var height: Int
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+      val windowMetrics = wm.currentWindowMetrics
+      val windowInsets: WindowInsets = windowMetrics.windowInsets
 
+      val insets = windowInsets.getInsetsIgnoringVisibility(
+              WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+      val insetsWidth = insets.right + insets.left
+      val insetsHeight = insets.top + insets.bottom
 
+      val b = windowMetrics.bounds
+      width = b.width() - insetsWidth
+      height = b.height() - insetsHeight
+    } else {
+      val size = Point()
+      val display = wm.defaultDisplay // deprecated in API 30
+      display?.getSize(size) // deprecated in API 30
+      width = size.x
+      height = size.y
+    }
+
+    width -= 50
+    height -= 50
+    return Pair(width, height)
   }
 }
