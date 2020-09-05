@@ -6,6 +6,7 @@ import alexrnov.butterflies.R
 import alexrnov.butterflies.databinding.ActivityDetailsBinding
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
+import alexrnov.butterflies.model.TextStyleObserver
 import android.content.Intent
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
@@ -81,6 +82,11 @@ class DetailsActivity : AppCompatActivity() {
 
     val linkDescription = intent.getStringExtra("linkDescription")
     linkDescription?.let { detailsViewModel.loadDetailsText(assetManager.open(it)) }
+
+
+    val observer = TextStyleObserver(applicationContext, lifecycle)
+    detailsText?.let { observer.addView(it) }
+    lifecycle.addObserver(observer)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
