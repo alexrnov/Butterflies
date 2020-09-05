@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <PreferenceCategory
+                app:key="detail_information"
+                app:title="@string/program_information">
+
+            <Preference
+                app:key="program_name"
+                app:title="@string/app_name"
+                app:summary="@string/app_name"
+            />
+
+            <Preference
+                app:key="program_version"
+                app:title="@string/version_pref"
+                app:summary="@string/app_version"
+            />
+
+            <Preference
+                app:key="add_resources"
+                app:title="@string/additional_resources"
+                app:summary="@string/images_summary"
+            />
+        </PreferenceCategory>
+</PreferenceScreen>

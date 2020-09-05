@@ -25,4 +25,33 @@
     <string name="description_button_title">Description</string>
     <string name="ecology_button_title">Ecology</string>
 
+    <!-- settings -->
+    <string name="appbar_scrolling_text">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
+
+    <string name="font_category">Настройки текста</string>
+
+    <string name="font_size">Размер текста</string>
+    <string name="font_size_summary">Выбрать другой размер шрифта</string>
+    <string name="very_min_size">очень мелкий</string>
+    <string name="min_size">мелкий</string>
+    <string name="middle_size">средний</string>
+    <string name="big_size">большой</string>
+    <string name="very_big_size">очень большой</string>
+
+    <string name="font_color">Цвет текста</string>
+    <string name="font_color_summary">Выбрать другой цвет шрифта</string>
+    <string name="black_color">черный</string>
+    <string name="gray_color">серый</string>
+    <string name="brown_color">коричневый</string>
+    <string name="blue_color">синий</string>
+
+    <string name="program_information">Информация</string>
+    <string name="information_summary">Дополнительная информация о версии и источниках ресурсов</string>
+
+    <string name="program_name">Название программы</string>
+    <string name="version_pref">Версия программы</string>
+
+    <string name="additional_resources">Дополнительные ресурсы</string>
+    <string name="images_summary">Изображения: www.goodfon.ru</string>
+    <string name="app_version">1.0</string>
 </resources>

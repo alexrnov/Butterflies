@@ -4,6 +4,7 @@ import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
 import alexrnov.butterflies.pager.PageViewModel
 import alexrnov.butterflies.pager.PagerAdapter
+import alexrnov.butterflies.settings.SettingsActivity
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -17,7 +18,6 @@ import javax.inject.Inject
 class MainActivity : AppCompatActivity() {
 
   // You want Dagger to provide an instance of LoginViewModel from the graph
-
   // Because MainActivity injects LoginViewModel, Dagger builds a graph that knows how
   // to provide an instance of LoginViewModel, and recursively, of its dependencies.
   // Dagger knows how to do this because of the @Inject annotation on the classes' constructor
@@ -51,7 +51,6 @@ class MainActivity : AppCompatActivity() {
     viewPager.adapter = pagerAdapter
     val tabs = findViewById<TabLayout>(R.id.tabs)
     tabs.setupWithViewPager(viewPager)
-
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -73,6 +72,8 @@ class MainActivity : AppCompatActivity() {
         true
       }
       R.id.action_settings -> {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
         true
       }
       else -> super.onOptionsItemSelected(item)

@@ -1,9 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string-array name="item_names">
-        <item>text1</item>
-        <item>text2</item>
-        <item>text3</item>
-        <item>text4</item>
+
+    <!-- text font size names array -->
+    <string-array name="text_size_names_array">
+        <item>@string/very_min_size</item>
+        <item>@string/min_size</item>
+        <item>@string/middle_size</item>
+        <item>@string/big_size</item>
+        <item>@string/very_big_size</item>
+    </string-array>
+
+    <!-- text font size values array -->
+    <string-array name="text_size_values_array">
+        <item>14</item>
+        <item>17</item>
+        <item>20</item>
+        <item>23</item>
+        <item>26</item>
+    </string-array>
+
+    <!-- text color names array -->
+    <string-array name="text_color_names_array">
+        <item>@string/gray_color</item>
+        <item>@string/black_color</item>
+        <item>@string/brown_color</item>
+        <item>@string/blue_color</item>
+    </string-array>
+
+    <!-- text color values array -->
+    <string-array name="text_color_values_array">
+        <item>#393939</item>
+        <item>#000000</item>
+        <item>#753100</item>
+        <item>#1a3677</item>
     </string-array>
 </resources>
