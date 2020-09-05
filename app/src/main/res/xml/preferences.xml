@@ -37,7 +37,7 @@
             app:key="information"
             app:title="@string/program_information"
             app:summary="@string/information_summary"
-            app:fragment="alexrnov.butterflies.settings.AboutSettingsFragment"
+            app:fragment="alexrnov.butterflies.settings.SettingsInfoFragment"
             android:icon="@drawable/icon_information"
             />
     </PreferenceCategory>
