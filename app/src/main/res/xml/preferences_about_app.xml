@@ -9,19 +9,21 @@
             <Preference
                 app:key="program_name"
                 app:title="@string/app_name"
-                app:summary="@string/app_name_summary"
-            />
+                app:summary="@string/app_name_summary" />
 
             <Preference
                 app:key="program_version"
                 app:title="@string/version_pref"
-                app:summary="@string/app_version"
-            />
+                app:summary="@string/app_version" />
+
+            <Preference
+                app:key="app_description"
+                app:title="@string/app_description_title"
+                app:summary="@string/app_description_text" />
 
             <Preference
                 app:key="add_resources"
                 app:title="@string/additional_resources"
-                app:summary="@string/wiki_summary"
-            />
+                app:summary="@string/wiki_summary" />
         </PreferenceCategory>
 </PreferenceScreen>

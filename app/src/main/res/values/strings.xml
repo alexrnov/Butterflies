@@ -54,4 +54,7 @@
     <string name="wiki_summary">Information taken from free resources of www.wikipedia.org</string>
     <string name="app_version">1.0</string>
     <string name="app_name_summary">Papilio butterflies of the world</string>
+
+    <string name="app_description_title">Description</string>
+    <string name="app_description_text">The application contains butterflies from the papilio family.\nEach butterfly has a photo, description and location on the world map</string>
 </resources>
