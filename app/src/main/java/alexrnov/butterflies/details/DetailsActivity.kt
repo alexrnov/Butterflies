@@ -7,6 +7,7 @@ import alexrnov.butterflies.databinding.ActivityDetailsBinding
 import alexrnov.butterflies.map.MapsActivity
 import alexrnov.butterflies.model.ActivityComponent
 import alexrnov.butterflies.model.TextStyleObserver
+import alexrnov.butterflies.settings.SettingsActivity
 import android.content.Intent
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
@@ -83,7 +84,7 @@ class DetailsActivity : AppCompatActivity() {
     val linkDescription = intent.getStringExtra("linkDescription")
     linkDescription?.let { detailsViewModel.loadDetailsText(assetManager.open(it)) }
 
-
+    // add observer for detailsText change style (color and size)
     val observer = TextStyleObserver(applicationContext, lifecycle)
     detailsText?.let { observer.addView(it) }
     lifecycle.addObserver(observer)
@@ -108,6 +109,8 @@ class DetailsActivity : AppCompatActivity() {
         true
       }
       R.id.action_settings -> {
+        val intent = Intent(this, SettingsActivity::class.java)
+        startActivity(intent)
         true
       }
       else -> super.onOptionsItemSelected(item)
