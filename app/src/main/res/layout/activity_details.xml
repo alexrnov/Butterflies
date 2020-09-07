@@ -25,6 +25,10 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fadeScrollbars="true"
+            android:fadingEdgeLength="50dp"
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
