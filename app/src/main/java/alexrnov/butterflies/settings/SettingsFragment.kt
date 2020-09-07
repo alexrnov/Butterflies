@@ -23,10 +23,10 @@ class SettingsFragment : PreferenceFragmentCompat() {
       fontSize.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
         //preference.summary = newValue.toString() // change summary under preference name
         val text = when(newValue) {
-          "14" -> getString(R.string.very_min_size)
-          "17" -> getString(R.string.min_size)
-          "20" -> getString(R.string.middle_size)
-          "23" -> getString(R.string.big_size)
+          "12" -> getString(R.string.very_min_size)
+          "16" -> getString(R.string.min_size)
+          "18" -> getString(R.string.middle_size)
+          "22" -> getString(R.string.big_size)
           else -> getString(R.string.very_big_size)
         }
         showSnackbar(this.requireView(), getString(R.string.font_size) + ": " + text)
@@ -42,8 +42,9 @@ class SettingsFragment : PreferenceFragmentCompat() {
           val text = when(newValue) {
             "#393939" -> getString(R.string.gray_color)
             "#000000" -> getString(R.string.black_color)
-            "#753100" -> getString(R.string.brown_color)
-            else -> getString(R.string.blue_color)
+            "#673d24" -> getString(R.string.brown_color)
+            "#2076b0" -> getString(R.string.blue_color)
+            else -> getString(R.string.green_color)
           }
           showSnackbar(this.requireView(), getString(R.string.font_color) + ": $text")
           true

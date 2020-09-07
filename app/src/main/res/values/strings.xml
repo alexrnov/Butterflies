@@ -43,6 +43,7 @@
     <string name="gray_color">gray</string>
     <string name="brown_color">brown</string>
     <string name="blue_color">blue</string>
+    <string name="green_color">green</string>
 
     <string name="program_information">Information</string>
     <string name="information_summary">Additional version information and resource sources</string>

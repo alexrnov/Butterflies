@@ -12,10 +12,10 @@
 
     <!-- text font size values array -->
     <string-array name="text_size_values_array">
-        <item>14</item>
-        <item>17</item>
-        <item>20</item>
-        <item>23</item>
+        <item>12</item>
+        <item>16</item>
+        <item>18</item>
+        <item>22</item>
         <item>26</item>
     </string-array>
 
@@ -25,13 +25,16 @@
         <item>@string/black_color</item>
         <item>@string/brown_color</item>
         <item>@string/blue_color</item>
+        <item>@string/green_color</item>
     </string-array>
 
     <!-- text color values array -->
     <string-array name="text_color_values_array">
         <item>#393939</item>
         <item>#000000</item>
-        <item>#753100</item>
-        <item>#1a3677</item>
+        <item>#673d24</item>
+        <item>#2076b0</item>
+        <item>#37662b</item>
+
     </string-array>
 </resources>
