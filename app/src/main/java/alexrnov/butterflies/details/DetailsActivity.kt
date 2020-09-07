@@ -55,6 +55,8 @@ class DetailsActivity : AppCompatActivity() {
 
     val actionBar = supportActionBar
     if (actionBar != null) {
+      actionBar.setDisplayHomeAsUpEnabled(true) // enable the Up button
+
       if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
         // FROM_HTML_MODE_LEGACY is the behaviour that was used for versions
         // below android N we are using this flag to give a consistent behaviour
@@ -111,6 +113,10 @@ class DetailsActivity : AppCompatActivity() {
       R.id.action_settings -> {
         val intent = Intent(this, SettingsActivity::class.java)
         startActivity(intent)
+        true
+      }
+      android.R.id.home -> {
+        onBackPressed() // In order for the home button press to return to the previous activity.
         true
       }
       else -> super.onOptionsItemSelected(item)
