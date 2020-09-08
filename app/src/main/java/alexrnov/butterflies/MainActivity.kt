@@ -51,6 +51,8 @@ class MainActivity : AppCompatActivity() {
     viewPager.adapter = pagerAdapter
     val tabs = findViewById<TabLayout>(R.id.tabs)
     tabs.setupWithViewPager(viewPager)
+
+    getScreenSizeWithNavBar(this)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {

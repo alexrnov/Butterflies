@@ -1,10 +1,17 @@
 package alexrnov.butterflies
 
+import android.content.Context
+import android.content.res.Configuration
 import android.graphics.Color
+import android.graphics.Point
+import android.os.Build
 import android.view.Gravity
 import android.view.View
+import android.view.WindowInsets
+import android.view.WindowManager
 import android.widget.FrameLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import com.google.android.material.snackbar.Snackbar
 
@@ -35,4 +42,51 @@ fun showSnackbar(view: View, message: CharSequence) {
   val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
   textView.setTextColor(Color.parseColor("#95d7ff")) // message color
   snackbar.show()
+}
+
+/** Get screen size with the navigation bar */
+fun getScreenSizeWithNavBar(activity: AppCompatActivity) {
+  val context = activity.applicationContext
+  val orientation = context.resources.configuration.orientation
+
+  val wm = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+  val w: Int
+  val h: Int
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+    val windowMetrics = wm.currentWindowMetrics
+    val windowInsets: WindowInsets = windowMetrics.windowInsets
+
+    val insets = windowInsets.getInsetsIgnoringVisibility(
+            WindowInsets.Type.navigationBars() or WindowInsets.Type.displayCutout())
+    val insetsWidth = insets.right + insets.left
+    val insetsHeight = insets.top + insets.bottom
+
+    val b = windowMetrics.bounds
+    w = b.width() - insetsWidth
+    h = b.height() - insetsHeight
+  } else {
+    val size = Point()
+    val display = wm.defaultDisplay // deprecated in API 30
+    display?.getSize(size) // deprecated in API 30
+    w = size.x
+    h = size.y
+  }
+
+  val width = getWidth(w, h, orientation)
+  val height = getHeight(w, h, orientation)
+
+  val displayMetrics = activity.resources.displayMetrics
+  // logical density of the display. This is a pixel density independent scaling factor (added in API Level 1)
+  val density: Float = displayMetrics.density
+  val dpWidth: Float = width / density
+  val dpHeight: Float = height / density
+  println("density = $density, width = $width, height = $height, dpWidth = $dpWidth, dpHeight = $dpHeight")
+}
+
+private fun getWidth(x: Int, y: Int, orientation: Int): Int {
+  return if (orientation == Configuration.ORIENTATION_PORTRAIT) x else y
+}
+
+private fun getHeight(x: Int, y: Int, orientation: Int): Int {
+  return if (orientation == Configuration.ORIENTATION_PORTRAIT) y else x
 }
