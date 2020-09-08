@@ -2,6 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="alexrnov.butterflies">
 
+    <!-- filters: -->
+    <!-- supports-screens - lets you specify the screen sizes your application supports. It's important that you always use this
+    element in your application to specify the screen sizes your application supports. normalScreen - this is an HVGA (480 x 320 or 640x240). -->
+    <!-- requiresSmallestWidthDp="320" - Specifies the minimum smallestWidth required. The smallestWidth is the shortest dimension of the
+    screen space (in dp units) that must be available to your application UI—that is, the shortest of the available screen's two dimensions.
+    Usually, the value you supply for this is the "smallest width" that your layout supports, regardless of the screen's current orientation.
+    A typical handset screen has a smallestWidth of 320dp. Value 320 is declared here to not support the screen - 640 x 240 -->
+    <supports-screens android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:requiresSmallestWidthDp="320"/>
+
     <permission
         android:name="alexrnov.butterflies.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
