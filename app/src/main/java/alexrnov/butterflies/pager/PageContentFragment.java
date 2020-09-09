@@ -17,6 +17,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.RecyclerView.LayoutManager;
+import kotlin.Pair;
+
+import static alexrnov.butterflies.ApplicationUtilsKt.getScreenSizeWithNavBar;
 
 /** A content fragment containing a view fo current page */
 public class PageContentFragment extends Fragment {
@@ -88,8 +91,21 @@ public class PageContentFragment extends Fragment {
 
     LayoutManager layoutManager;
     if (landscape) {
+      Pair<Float, Float> sizes = getScreenSizeWithNavBar(requireActivity());
+      Log.i("P", "screen size = " + sizes.getFirst() + ", " + sizes.getSecond());
+      Float w = sizes.getSecond();
+      int gridNumber;
+      if (w <= 530.0) { // 3.2 HVGA slider (ADP1) Api 23 (320 x 480 mdpi)
+        gridNumber = 2;
+      } else if (w > 530 && w <= 800) { //  nexus one api 26 (480 x 800 hdpi)
+        gridNumber = 3;
+      } else if (w > 800 && w < 1024) { // sony xperia z ultra and samsung galaxy
+        gridNumber = 4;
+      } else { // Nexus 9 api 26 (2048 x 1536 xhdpi)
+        gridNumber = 5;
+      }
       // GridLayoutManager arranges the items in a many-dimensional list
-      layoutManager = new GridLayoutManager(getActivity(), 4);
+      layoutManager = new GridLayoutManager(getActivity(), gridNumber);
     } else {
       layoutManager = new LinearLayoutManager(getActivity());
     }

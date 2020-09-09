@@ -13,6 +13,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.fragment.app.FragmentActivity
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -45,7 +46,7 @@ fun showSnackbar(view: View, message: CharSequence) {
 }
 
 /** Get screen size with the navigation bar */
-fun getScreenSizeWithNavBar(activity: AppCompatActivity) {
+fun getScreenSizeWithNavBar(activity: FragmentActivity): Pair<Float, Float> {
   val context = activity.applicationContext
   val orientation = context.resources.configuration.orientation
 
@@ -80,7 +81,8 @@ fun getScreenSizeWithNavBar(activity: AppCompatActivity) {
   val density: Float = displayMetrics.density
   val dpWidth: Float = width / density
   val dpHeight: Float = height / density
-  println("density = $density, width = $width, height = $height, dpWidth = $dpWidth, dpHeight = $dpHeight")
+  //println("density = $density, width = $width, height = $height, dpWidth = $dpWidth, dpHeight = $dpHeight")
+  return Pair(dpWidth, dpHeight)
 }
 
 private fun getWidth(x: Int, y: Int, orientation: Int): Int {
