@@ -92,7 +92,7 @@
         android:layout_marginRight="16dp"
         android:layout_marginBottom="8dp"
         android:fadeScrollbars="true"
-        android:fadingEdgeLength="50dp"
+        android:fadingEdgeLength="20dp"
         android:requiresFadingEdge="vertical"
         android:scrollbars="none"
         app:layout_constraintBottom_toTopOf="@+id/close_dialog_button"

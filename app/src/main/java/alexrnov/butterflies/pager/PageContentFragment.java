@@ -63,11 +63,7 @@ public class PageContentFragment extends Fragment {
     super.onCreate(savedInstanceState);
 
     Context context = getContext();
-    if (context != null) {
-      landscape = context.getResources().getBoolean(R.bool.is_landscape);
-    }
-
-    Log.i("P", "landscape orientation = " + landscape);
+    if (context != null) landscape = context.getResources().getBoolean(R.bool.is_landscape);
 
     //pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class); // is deprecated
     //pageViewModel = new ViewModelProvider(this).get(PageViewModel.class); // in case, when di don't use
@@ -91,21 +87,8 @@ public class PageContentFragment extends Fragment {
 
     LayoutManager layoutManager;
     if (landscape) {
-      Pair<Float, Float> sizes = getScreenSizeWithNavBar(requireActivity());
-      Log.i("P", "screen size = " + sizes.getFirst() + ", " + sizes.getSecond());
-      Float w = sizes.getSecond();
-      int gridNumber;
-      if (w <= 530.0) { // 3.2 HVGA slider (ADP1) Api 23 (320 x 480 mdpi)
-        gridNumber = 2;
-      } else if (w > 530 && w <= 800) { //  nexus one api 26 (480 x 800 hdpi)
-        gridNumber = 3;
-      } else if (w > 800 && w < 1024) { // sony xperia z ultra and samsung galaxy
-        gridNumber = 4;
-      } else { // Nexus 9 api 26 (2048 x 1536 xhdpi)
-        gridNumber = 5;
-      }
       // GridLayoutManager arranges the items in a many-dimensional list
-      layoutManager = new GridLayoutManager(getActivity(), gridNumber);
+      layoutManager = new GridLayoutManager(getActivity(), getGridNumber());
     } else {
       layoutManager = new LinearLayoutManager(getActivity());
     }
@@ -117,5 +100,24 @@ public class PageContentFragment extends Fragment {
     });
 
     return root;
+  }
+
+  private int getGridNumber() {
+    Pair<Float, Float> sizes = getScreenSizeWithNavBar(requireActivity());
+    Log.i("P", "screen size = " + sizes.getFirst() + ", " + sizes.getSecond());
+    Float w = sizes.getSecond();
+    int gridNumber;
+    if (w < 530.0) { // 3.2 HVGA slider (ADP1) Api 23 (320 x 480 mdpi)
+      gridNumber = 2;
+    } else if (w >= 530 && w < 800) { //  nexus one api 26 (480 x 800 hdpi)
+      gridNumber = 3;
+    } else if (w >= 800 && w < 1024) { // sony xperia z ultra and samsung galaxy
+      gridNumber = 4;
+    } else if (w >= 1024 && w < 1280) { // Nexus 9 api 26 (2048 x 1536 xhdpi)
+      gridNumber = 5;
+    } else { // Nexus 10 Api 30 (2560 x 1600 xhdpi)
+      gridNumber = 6;
+    }
+    return gridNumber;
   }
 }

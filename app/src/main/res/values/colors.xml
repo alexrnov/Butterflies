@@ -11,5 +11,7 @@
 
     <color name="selectTabTitle">#ffffff</color>
     <color name="defaultTabTitle">#9c9c9c</color>
+
+    <color name="tabBackground">#c8f3f2</color>
 </resources>
 
