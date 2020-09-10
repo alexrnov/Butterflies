@@ -6,6 +6,8 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="appbar_padding_top">8dp</dimen>
 
-    <dimen name="port_card_text_size">5sp</dimen>
-    <dimen name="land_card_text_size">10sp</dimen>
+    <!-- dimension for card items -->
+    <!-- samsung galaxy tablet -->
+    <dimen name="port_card_text_size">17sp</dimen>
+    <dimen name="land_card_text_size">18sp</dimen>
 </resources>
