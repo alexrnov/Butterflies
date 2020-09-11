@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="155dp"
-            android:layout_height="155dp"
+            android:layout_width="@dimen/card_image_size"
+            android:layout_height="@dimen/card_image_size"
             android:layout_gravity="center_vertical"
             android:contentDescription="@string/image_description" />
 

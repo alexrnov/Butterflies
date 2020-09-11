@@ -7,6 +7,8 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <!-- dimension for card items -->
-    <dimen name="port_card_text_size">16sp</dimen>
+    <!-- Nexus 5 API 29 (1080 x 1920 xxhdpi) -->
+    <dimen name="card_image_size">155dp</dimen>
+    <dimen name="port_card_text_size">17sp</dimen>
     <dimen name="land_card_text_size">20sp</dimen>
 </resources>

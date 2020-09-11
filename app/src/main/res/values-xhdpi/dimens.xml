@@ -8,6 +8,7 @@
 
     <!-- dimension for card items -->
     <!-- Nexus 9 API 26 (2048 x 1536 xhdpi)-->
-    <dimen name="port_card_text_size">20sp</dimen>
-    <dimen name="land_card_text_size">20sp</dimen>
+    <dimen name="card_image_size">155dp</dimen>
+    <dimen name="port_card_text_size">17sp</dimen>
+    <dimen name="land_card_text_size">19sp</dimen>
 </resources>
