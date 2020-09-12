@@ -42,10 +42,11 @@
 
                 <ImageView
                     android:id="@+id/big_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_width="270dp"
+                    android:layout_height="270dp"
                     android:src="@{viewmodel.bigImage}"
-                    tools:srcCompat="@tools:sample/backgrounds/scenic"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
                     android:contentDescription="@string/details_image_description" />
 
                 <TextView
@@ -53,7 +54,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{viewmodel.detailsText}"
-                    android:layout_gravity="center_vertical"
+                    android:layout_gravity="center_horizontal"
                     android:gravity="center"/>
             </LinearLayout>
         </ScrollView>
