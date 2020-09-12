@@ -61,4 +61,7 @@
 
     <!-- card item -->
     <string name="image_description">butterfly_image</string>
+
+    <!-- details activity-->
+    <string name="details_image_description">detail_image</string>
 </resources>
