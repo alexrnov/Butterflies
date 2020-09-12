@@ -39,7 +39,6 @@ class ButterfliesAdapter constructor(private val list: List<ButterflyData>,
     holder.cardView.tag = position
     holder.cardView.isClickable = true
 
-
     holder.cardView.setOnClickListener { view ->
       val context = view.context
       val intent = Intent(view.context, DetailsActivity::class.java)

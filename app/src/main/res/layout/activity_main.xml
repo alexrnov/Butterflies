@@ -29,6 +29,7 @@
             android:background="?attr/colorPrimary"
             app:popupTheme="@style/AppTheme.PopupOverlay"/>
 
+        <!-- app:tabRippleColor="@android:color/transparent" - remove ripple effect -->
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabs"
             android:layout_width="match_parent"

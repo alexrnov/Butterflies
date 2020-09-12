@@ -6,9 +6,14 @@ import alexrnov.butterflies.pager.PageViewModel
 import alexrnov.butterflies.pager.PagerAdapter
 import alexrnov.butterflies.settings.SettingsActivity
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
+import android.graphics.drawable.RippleDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.viewpager.widget.ViewPager
@@ -51,8 +56,22 @@ class MainActivity : AppCompatActivity() {
     viewPager.adapter = pagerAdapter
     val tabs = findViewById<TabLayout>(R.id.tabs)
     tabs.setupWithViewPager(viewPager)
+    setRippleEffectColor(tabs)
+  }
 
-    //getScreenSizeWithNavBar(this)
+  // set ripple color. Also you can used attribute app:tabRippleColor im xml
+  private fun setRippleEffectColor(tabs: TabLayout) {
+    // own color for each tab
+    //val colors = mapOf(0 to "#fffaa0", 1 to "#ffa0b2", 2 to "#b8ffa0",
+            //3 to "#afa0ff", 4 to "#ffd4a0", 5 to "#ffa0a0", 6 to "#a0fff2")
+    for (n in 0 until tabs.tabCount) {
+      val tab = (tabs.getChildAt(0) as ViewGroup).getChildAt(n)
+      tab?.let {
+        val ripple = it.background as? RippleDrawable
+        //ripple?.setColor(ColorStateList.valueOf(Color.parseColor(colors[n])))
+        ripple?.setColor(ColorStateList.valueOf(Color.parseColor("#a0fff2")))
+      }
+    }
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
