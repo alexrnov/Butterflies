@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".details.DetailsActivity">
+
+    <!-- for data binding -->
+    <data>
+        <variable name="viewmodel" type="alexrnov.butterflies.details.DetailsViewModel"/>
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detailsAppToolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:fadeScrollbars="true"
+            android:fadingEdgeLength="5dp"
+            android:requiresFadingEdge="vertical"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detailsAppToolbar">
+
+            <!-- divider - for set distance between children elements of LinearLayout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@drawable/details_divider"
+                android:orientation="vertical"
+                android:showDividers="middle"
+                tools:ignore="UseCompoundDrawables">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="585dp"
+                    android:layout_gravity="center_horizontal"
+                    android:elevation="4dp"
+                    android:gravity="center"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:id="@+id/big_image"
+                        android:layout_width="580dp"
+                        android:layout_height="580dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:contentDescription="@string/details_image_description"
+                        android:gravity="center"
+                        android:src="@{viewmodel.bigImage}" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/description_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:text="@{viewmodel.detailsText}" />
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
