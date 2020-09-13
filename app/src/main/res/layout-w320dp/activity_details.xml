@@ -57,15 +57,15 @@
                     android:elevation="4dp"
                     app:cardElevation="4dp">
 
-                <ImageView
-                    android:id="@+id/big_image"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/details_image_description"
-                    android:src="@{viewmodel.bigImage}" />
+                    <ImageView
+                        android:id="@+id/big_image"
+                        android:layout_width="260dp"
+                        android:layout_height="260dp"
+                        android:background="@color/white"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/details_image_description"
+                        android:src="@{viewmodel.bigImage}" />
 
                 </androidx.cardview.widget.CardView>
 

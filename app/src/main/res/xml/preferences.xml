@@ -9,7 +9,7 @@
         <ListPreference
             android:key="font_size"
             android:title="@string/font_size"
-            android:defaultValue="20"
+            android:defaultValue="18"
             android:entries="@array/text_size_names_array"
             android:entryValues="@array/text_size_values_array"
             android:summary="@string/font_size_summary"
