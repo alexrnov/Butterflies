@@ -49,22 +49,22 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="520dp"
+                    android:layout_height="964dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardUseCompatPadding="true"
+                    android:gravity="center"
                     android:layout_gravity="center_horizontal"
                     android:elevation="4dp"
-                    android:gravity="center"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="4dp"
-                    app:cardUseCompatPadding="true">
+                    app:cardElevation="4dp">
 
                     <ImageView
                         android:id="@+id/big_image"
-                        android:layout_width="480dp"
-                        android:layout_height="480dp"
-                        android:layout_gravity="center"
+                        android:layout_width="964dp"
+                        android:layout_height="964dp"
                         android:background="@color/white"
-                        android:contentDescription="@string/details_image_description"
                         android:gravity="center"
+                        android:layout_gravity="center"
+                        android:contentDescription="@string/details_image_description"
                         android:src="@{viewmodel.bigImage}" />
 
                 </androidx.cardview.widget.CardView>

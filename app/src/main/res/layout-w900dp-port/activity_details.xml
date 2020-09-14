@@ -26,9 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:fadeScrollbars="true"
             android:fadingEdgeLength="5dp"
             android:requiresFadingEdge="vertical"
@@ -49,23 +47,24 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="260dp"
-                    app:cardCornerRadius="12dp"
-                    app:cardUseCompatPadding="true"
-                    android:gravity="center"
+                    android:layout_height="840dp"
                     android:layout_gravity="center_horizontal"
                     android:elevation="4dp"
-                    app:cardElevation="4dp">
-
-                <ImageView
-                    android:id="@+id/big_image"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp"
-                    android:background="@color/white"
                     android:gravity="center"
-                    android:layout_gravity="center"
-                    android:contentDescription="@string/details_image_description"
-                    android:src="@{viewmodel.bigImage}" />
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="4dp"
+                    app:cardUseCompatPadding="true">
+
+                    <ImageView
+                        android:id="@+id/big_image"
+                        android:layout_width="840dp"
+                        android:layout_height="840dp"
+                        android:layout_gravity="center"
+                        android:background="@color/white"
+                        android:contentDescription="@string/details_image_description"
+                        android:gravity="center"
+                        android:src="@{viewmodel.bigImage}" />
 
                 </androidx.cardview.widget.CardView>
 
