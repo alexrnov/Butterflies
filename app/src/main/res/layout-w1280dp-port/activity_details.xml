@@ -49,19 +49,18 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="216dp"
+                    android:layout_height="1220dp"
                     android:layout_gravity="center_horizontal"
                     android:elevation="4dp"
                     android:gravity="center"
-                    app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="4dp"
                     app:cardUseCompatPadding="true">
 
                     <ImageView
                         android:id="@+id/big_image"
-                        android:layout_width="216dp"
-                        android:layout_height="216dp"
+                        android:layout_width="1220dp"
+                        android:layout_height="1220dp"
                         android:layout_gravity="center"
                         android:background="@color/white"
                         android:contentDescription="@string/details_image_description"

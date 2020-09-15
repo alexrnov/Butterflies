@@ -19,6 +19,8 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
@@ -47,7 +49,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
+                    android:layout_height="288dp"
                     android:layout_gravity="center_horizontal"
                     android:elevation="4dp"
                     android:gravity="center"
@@ -58,8 +60,8 @@
 
                     <ImageView
                         android:id="@+id/big_image"
-                        android:layout_width="500dp"
-                        android:layout_height="500dp"
+                        android:layout_width="288dp"
+                        android:layout_height="288dp"
                         android:layout_gravity="center"
                         android:background="@color/white"
                         android:contentDescription="@string/details_image_description"

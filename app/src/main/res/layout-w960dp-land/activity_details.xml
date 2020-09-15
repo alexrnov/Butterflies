@@ -49,7 +49,7 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="216dp"
+                    android:layout_height="384dp"
                     android:layout_gravity="center_horizontal"
                     android:elevation="4dp"
                     android:gravity="center"
@@ -60,8 +60,8 @@
 
                     <ImageView
                         android:id="@+id/big_image"
-                        android:layout_width="216dp"
-                        android:layout_height="216dp"
+                        android:layout_width="384dp"
+                        android:layout_height="384dp"
                         android:layout_gravity="center"
                         android:background="@color/white"
                         android:contentDescription="@string/details_image_description"
