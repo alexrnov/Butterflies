@@ -1,0 +1,14 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="appbar_padding">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="appbar_padding_top">8dp</dimen>
+
+    <!-- dimension for card items -->
+    <!-- 3.2  HVGA slider (ADP1) API 23	(320 x 480 mdpi) -->
+    <dimen name="card_image_size">155dp</dimen>
+    <dimen name="port_card_text_size">15sp</dimen>
+    <dimen name="land_card_text_size">17sp</dimen>
+</resources>
