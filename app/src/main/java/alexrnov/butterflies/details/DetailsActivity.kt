@@ -10,6 +10,8 @@ import alexrnov.butterflies.model.TextStyleObserver
 import alexrnov.butterflies.settings.SettingsActivity
 import android.content.Intent
 import android.content.res.AssetManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
@@ -51,23 +53,12 @@ class DetailsActivity : AppCompatActivity() {
     //setContentView(R.layout.activity_details) // when the data binding is not using
 
     val toolbar = findViewById<Toolbar>(R.id.detailsAppToolbar)
+    toolbar.setTitle(R.string.app_name)
+    toolbar.setTitleTextColor(Color.parseColor("#ffffff"))
     setSupportActionBar(toolbar)
 
     val actionBar = supportActionBar
-    actionBar?.let {
-      it.setDisplayHomeAsUpEnabled(true) // enable the Up button
-
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        // FROM_HTML_MODE_LEGACY is the behaviour that was used for versions
-        // below android N we are using this flag to give a consistent behaviour
-        it.title = Html.fromHtml("<font color='#ffffff'>" +
-                this.getString(R.string.app_name) + "</font>", Html.FROM_HTML_MODE_LEGACY)
-      } else {
-        @Suppress("DEPRECATION")
-        it.title = Html.fromHtml("<font color='#ffffff'>" +
-                this.getString(R.string.app_name) + "</font>")
-      }
-    }
+    actionBar?.setDisplayHomeAsUpEnabled(true)
 
     bigImage = findViewById(R.id.big_image)
     detailsText = findViewById(R.id.description_text)

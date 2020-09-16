@@ -1,6 +1,7 @@
 package alexrnov.butterflies.settings
 
 import alexrnov.butterflies.R
+import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.text.Html
@@ -18,20 +19,10 @@ class SettingsActivity : AppCompatActivity(),
     setContentView(R.layout.activity_settings)
 
     val toolbar = findViewById<Toolbar>(R.id.main_toolbar)
+    toolbar.setTitle(R.string.app_name)
+    toolbar.setTitleTextColor(Color.parseColor("#ffffff"))
     setSupportActionBar(toolbar)
-
-    supportActionBar?.let {
-
-      it.setDisplayHomeAsUpEnabled(true) // enable the Up button
-
-      val s = "<font color='#ffffff'>" + this.getString(R.string.app_name) + "</font>"
-      if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-        it.title = Html.fromHtml(s, Html.FROM_HTML_MODE_LEGACY)
-      } else {
-        @Suppress("DEPRECATION")
-        it.title = Html.fromHtml(s)
-      }
-    }
+    supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
     supportFragmentManager
             .beginTransaction()
