@@ -2,9 +2,7 @@ package alexrnov.butterflies.settings
 
 import alexrnov.butterflies.R
 import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar

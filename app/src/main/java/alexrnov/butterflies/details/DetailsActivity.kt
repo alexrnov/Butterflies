@@ -10,13 +10,8 @@ import alexrnov.butterflies.model.TextStyleObserver
 import alexrnov.butterflies.settings.SettingsActivity
 import android.content.Intent
 import android.content.res.AssetManager
-import android.content.res.ColorStateList
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
@@ -24,9 +19,6 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.Observer
-import java.io.InputStream
 import javax.inject.Inject
 
 class DetailsActivity : AppCompatActivity() {
