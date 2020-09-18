@@ -4,7 +4,10 @@ import android.content.Context
 import android.content.Intent
 import android.view.Surface
 import androidx.test.core.app.ApplicationProvider
+import androidx.test.espresso.Espresso.onView
+import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
 import androidx.test.platform.app.InstrumentationRegistry
@@ -20,7 +23,7 @@ private const val BASIC_SAMPLE_PACKAGE = "alexrnov.butterflies"
 @RunWith(AndroidJUnit4::class)
 // the annotation verifies that the API is at least version 18, as required by the Automator framework
 @SdkSuppress(minSdkVersion = 18)
-class PagerTest {
+class NavigationTest {
   private lateinit var device: UiDevice
 
   @Before
@@ -49,12 +52,26 @@ class PagerTest {
   }
 
   @Test
-  fun recycler_scroll() {
+  fun recyclerScroll() {
     InstrumentationRegistry.getInstrumentation().uiAutomation
             .setRotation(Surface.ROTATION_0) // portrait orientation
     val list = UiScrollable(UiSelector().resourceId("$BASIC_SAMPLE_PACKAGE:id/recycler_view"))
     list.flingToEnd(7)
     device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
             LAUNCH_TIMEOUT ) // Wait
+  }
+
+  @Test
+  fun tabLayerClick() {
+    InstrumentationRegistry.getInstrumentation().uiAutomation
+            .setRotation(Surface.ROTATION_90) // portrait orientation
+    val list = UiScrollable(UiSelector().resourceId("$BASIC_SAMPLE_PACKAGE:id/tabs"))
+    list.flingToEnd(2)
+    onView(withText("CHILASA MOORE")).perform(click())
+    device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
+            LAUNCH_TIMEOUT) // Wait
+    onView(withText("PAPILIO LINNAEUS")).perform(click())
+    device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
+            LAUNCH_TIMEOUT) // Wait
   }
 }
