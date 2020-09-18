@@ -15,20 +15,22 @@
         android:xlargeScreens="true"
         android:requiresSmallestWidthDp="320"/>
 
+    <!-- All apps that don't explicitly require android.hardware.touchscreen will also work on devices with android.hardware.faketouch.-->
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+
+    <!-- By declaring a feature explicitly and including an android:required="false" attribute, you can effectively disable all filtering on Google Play for the specified feature. -->
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+
     <permission
         android:name="alexrnov.butterflies.permission.MAPS_RECEIVE"
         android:protectionLevel="signature"/>
     <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
+      The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+       Google Maps Android API v2, but you must specify either coarse or fine
+       location permissions for the 'MyLocation' functionality.
     -->
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <uses-permission android:name="alexrnov.googlemap.permission.MAPS_RECEIVE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -39,20 +41,30 @@
     <!-- android:theme="@style/AppTheme" -->
     <application
         android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-        android:name="alexrnov.butterflies.Initialization">
+        android:name="alexrnov.butterflies.Initialization"
+        android:hardwareAccelerated="true"
+        android:largeHeap="true">
+
+        <!-- To run tests that rely on JUnit-based classes, add the necessary <uses-library> elements. -->
+        <!-- when required="false" the application can use the library if present, but is designed to function without it if necessary.  The system will allow the application
+        to be installed, even if the library is not present. If you use "false", you are responsible for checking at runtime that the library is available.-->
+        <uses-library android:name="android.test.runner" android:required="false" />
+        <uses-library android:name="android.test.base" android:required="false" />
+        <uses-library android:name="android.test.mock" android:required="false" />
 
         <!--
-             The API key for Google Maps-based APIs is defined as a string resource.
-             (See the file "res/values/google_maps_api.xml").
-             Note that the API key is linked to the encryption key used to sign the APK.
-             You need a different API key for each encryption key, including the release key that is used to
-             sign the APK for publishing.
-             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        The API key for Google Maps-based APIs is defined as a string resource.
+         (See the file "res/values/google_maps_api.xml"). Note that the API key is
+         linked to the encryption key used to sign the APK. You need a different API
+         key for each encryption key, including the release key that is used to sign
+         the APK for publishing. You can define the keys for the debug and release
+         targets in src/debug/ and src/release/.
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -69,11 +81,10 @@
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
         <activity
             android:name=".details.DetailsActivity"
             android:theme="@style/AppTheme.NoActionBar">
@@ -88,6 +99,5 @@
                 android:value="alexrnov.butterflies.MainActivity" />
         </activity>
     </application>
-
 
 </manifest>
