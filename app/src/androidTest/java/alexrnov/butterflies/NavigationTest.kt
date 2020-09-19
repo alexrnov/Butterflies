@@ -57,7 +57,7 @@ class NavigationTest {
   fun recyclerScroll() {
     InstrumentationRegistry.getInstrumentation().uiAutomation
             .setRotation(Surface.ROTATION_0) // portrait orientation
-    val list = UiScrollable(UiSelector().resourceId("$BASIC_SAMPLE_PACKAGE:id/recycler_view"))
+    val list = UiScrollable(UiSelector().resourceId("$BASIC_SAMPLE_PACKAGE:id/items_recycler_view"))
     list.flingToEnd(7)
     device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
             LAUNCH_TIMEOUT ) // Wait

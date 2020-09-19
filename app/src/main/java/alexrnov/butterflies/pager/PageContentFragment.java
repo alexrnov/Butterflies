@@ -80,7 +80,7 @@ public class PageContentFragment extends Fragment {
           Bundle savedInstanceState) {
     View root = inflater.inflate(R.layout.fragment_main, container, false);
 
-    recyclerView = root.findViewById(R.id.recycler_view);
+    recyclerView = root.findViewById(R.id.items_recycler_view);
     // use this setting to improve performance if you know that changes
     // in content do not change the layout size of the RecyclerView
     recyclerView.setHasFixedSize(true);
