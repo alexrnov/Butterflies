@@ -11,7 +11,7 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.contrib.RecyclerViewActions
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import androidx.test.filters.LargeTest
+import androidx.test.filters.MediumTest
 import androidx.test.rule.ActivityTestRule
 import com.google.android.material.tabs.TabLayout
 import org.hamcrest.Matchers
@@ -20,8 +20,8 @@ import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-@LargeTest // Marks a test that should run as part of the large tests.
-class SettingsTest {
+@MediumTest // Marks a test that should run as part of the medium tests.
+class TabsTest {
 
   @get:Rule
   var activityRule: ActivityTestRule<MainActivity>
@@ -43,15 +43,12 @@ class SettingsTest {
 
   @Test
   fun openAllTabs() {
-    for (tab in 1..6) {
+    (1..6).forEach { tab ->
       onView(withId(R.id.tabs)).perform(selectTabAtPosition(tab))
-      /*
-      onView(Matchers.allOf(isDisplayed(), withId(R.id.items_recycler_view)))
-              .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
-      onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
-      */
     }
-
+    (6 downTo 0).forEach { tab ->
+      onView(withId(R.id.tabs)).perform(selectTabAtPosition(tab))
+    }
   }
 
   private fun selectTabAtPosition(tabIndex: Int): ViewAction {
@@ -71,5 +68,4 @@ class SettingsTest {
       }
     }
   }
-
 }
