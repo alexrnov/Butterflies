@@ -7,6 +7,8 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.matcher.ViewMatchers
+import androidx.test.espresso.assertion.ViewAssertions.matches
+import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.SdkSuppress
@@ -73,5 +75,28 @@ class NavigationTest {
     onView(withText("PAPILIO LINNAEUS")).perform(click())
     device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
             LAUNCH_TIMEOUT) // Wait
+  }
+
+  @Test
+  fun changeSizeFont() {
+    InstrumentationRegistry.getInstrumentation().uiAutomation
+            .setRotation(Surface.ROTATION_90) // landscape orientation
+
+    // Get the button object. If you want to access a specific UI component in your
+    // application, use the UiSelector class. This class represents a request for
+    // specific items in the currently displayed user interface.
+    val settingsButton: UiObject = device.findObject(UiSelector()
+            .resourceId("$BASIC_SAMPLE_PACKAGE:id/action_settings"))
+    settingsButton.click()
+
+    device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
+            LAUNCH_TIMEOUT) // Wait
+    onView(withText(R.string.font_size)).perform(click())
+    device.wait(Until.hasObject(By.pkg(BASIC_SAMPLE_PACKAGE).depth(0)),
+            LAUNCH_TIMEOUT) // Wait
+    onView(withText(R.string.very_big_size)).perform(click())
+    device.pressBack() // back to main activity
+
+    onView(withId(R.id.tabs)).check(matches(ViewMatchers.isDisplayed()))
   }
 }
