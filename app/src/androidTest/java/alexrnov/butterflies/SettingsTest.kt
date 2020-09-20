@@ -3,6 +3,7 @@ package alexrnov.butterflies
 import android.content.pm.ActivityInfo
 import androidx.recyclerview.widget.RecyclerView
 import alexrnov.butterflies.testutils.TestViewSPMatcher
+import alexrnov.butterflies.testutils.Utils.withTextColor
 import android.view.View
 import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
@@ -86,6 +87,56 @@ class SettingsTest {
     onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
     onView(withId(R.id.description_text)).check(ViewAssertions.matches(isSP(26.0f)))
   }
+
+  @Test
+  fun changeFontColor() {
+    activityRule.activity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
+
+    onView(Matchers.allOf(isDisplayed(), withId(R.id.items_recycler_view)))
+            .perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(0, click()))
+
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.font_color)).perform(click())
+    onView(withText(R.string.gray_color)).perform(click())
+    onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(ViewAssertions.matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    // press up home button
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.GrayTextColor)))
+
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.font_color)).perform(click())
+    onView(withText(R.string.black_color)).perform(click())
+    onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(ViewAssertions.matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.BlackTextColor)))
+
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.font_color)).perform(click())
+    onView(withText(R.string.brown_color)).perform(click())
+    onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(ViewAssertions.matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.BrownTextColor)))
+
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.font_color)).perform(click())
+    onView(withText(R.string.blue_color)).perform(click())
+    onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(ViewAssertions.matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.BlueTextColor)))
+
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.font_color)).perform(click())
+    onView(withText(R.string.green_color)).perform(click())
+    onView(withId(com.google.android.material.R.id.snackbar_text))
+            .check(ViewAssertions.matches(withEffectiveVisibility(Visibility.VISIBLE)))
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.GreenTextColor)))
+  }
+
 
   private fun isSP(size: Float): Matcher<View> {
     return TestViewSPMatcher(activityRule.activity).isSize(size)

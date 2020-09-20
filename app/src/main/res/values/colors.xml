@@ -13,5 +13,12 @@
     <color name="defaultTabTitle">#9c9c9c</color>
 
     <color name="tabBackground">#c8f3f2</color>
+
+    <!-- TextView color for tests -->
+    <color name="GrayTextColor">#393939</color>
+    <color name="BlackTextColor">#000000</color>
+    <color name="BrownTextColor">#673d24</color>
+    <color name="BlueTextColor">#2076b0</color>
+    <color name="GreenTextColor">#37662b</color>
 </resources>
 
