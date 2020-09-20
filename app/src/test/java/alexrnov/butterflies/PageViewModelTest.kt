@@ -4,7 +4,7 @@ import alexrnov.butterflies.model.Repository
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
-import com.google.common.truth.Truth.assertThat
+//import com.google.common.truth.Truth.assertThat
 
 import org.junit.Test
 import org.junit.runner.RunWith
