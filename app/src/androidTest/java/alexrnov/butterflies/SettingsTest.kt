@@ -5,13 +5,10 @@ import androidx.recyclerview.widget.RecyclerView
 import alexrnov.butterflies.testutils.TestViewSPMatcher
 import alexrnov.butterflies.testutils.Utils.withTextColor
 import android.view.View
-import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.action.ViewActions.click
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.contrib.RecyclerViewActions
-import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -137,6 +134,16 @@ class SettingsTest {
     onView(withId(R.id.description_text)).check(ViewAssertions.matches(withTextColor(R.color.GreenTextColor)))
   }
 
+  @Test
+  fun aboutApp() {
+    onView(withId(R.id.action_settings)).perform(click())
+    onView(withText(R.string.program_information)).perform(click())
+    onView(withText(R.string.version_pref)).check(ViewAssertions.matches(isDisplayed()))
+    onView(withText(R.string.additional_resources)).check(ViewAssertions.matches(isDisplayed()))
+    // press up home button
+    onView(withContentDescription(R.string.abc_action_bar_up_description)).perform(click())
+    onView(withText(R.string.about_program_category)).check(ViewAssertions.matches(isDisplayed()))
+  }
 
   private fun isSP(size: Float): Matcher<View> {
     return TestViewSPMatcher(activityRule.activity).isSize(size)
