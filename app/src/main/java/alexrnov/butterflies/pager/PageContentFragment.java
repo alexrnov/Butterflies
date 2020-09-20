@@ -2,7 +2,6 @@ package alexrnov.butterflies.pager;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +103,7 @@ public class PageContentFragment extends Fragment {
 
   private int getGridNumber() {
     Pair<Float, Float> sizes = getScreenSizeWithNavBar(requireActivity());
-    Log.i("P", "screen size = " + sizes.getFirst() + ", " + sizes.getSecond());
+    //Log.i("P", "screen size = " + sizes.getFirst() + ", " + sizes.getSecond());
     Float w = sizes.getSecond();
     int gridNumber;
     if (w < 530.0) { // 3.2 HVGA slider (ADP1) Api 23 (320 x 480 mdpi)

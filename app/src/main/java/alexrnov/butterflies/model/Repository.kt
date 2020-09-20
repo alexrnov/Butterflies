@@ -4,7 +4,6 @@ import alexrnov.butterflies.pager.ButterflyData
 import android.content.Context
 import android.content.res.AssetManager
 import android.graphics.drawable.Drawable
-import android.util.Log
 import java.io.*
 import java.util.*
 import javax.inject.Inject
@@ -22,11 +21,11 @@ class Repository @Inject constructor(val context: Context) {
     val arrayItems: Array<out String>? = assetManager.list("data/tab${pageIndex + 1}")
     val listItems: MutableList<String> = arrayItems?.toMutableList()?: ArrayList()
 
-    listItems.sortWith(Comparator { s1: String, s2: String ->
+    listItems.sortWith { s1: String, s2: String ->
       val n1 = s1.removeRange(0, 4).toInt()
       val n2 = s2.removeRange(0, 4).toInt()
       n1.compareTo(n2)
-    })
+    }
 
     val returnList:MutableList<ButterflyData> = ArrayList()
 
@@ -69,9 +68,4 @@ class Repository @Inject constructor(val context: Context) {
   fun loadImage(input: InputStream): Drawable {
     return Drawable.createFromStream(input, null)
   }
-
-  fun print() {
-    println("print from repository")
-  }
-
 }

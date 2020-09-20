@@ -1,6 +1,5 @@
 package alexrnov.butterflies.model
 
-import alexrnov.butterflies.AboutDialogFragment
 import alexrnov.butterflies.pager.PageContentFragment
 import alexrnov.butterflies.MainActivity
 import alexrnov.butterflies.details.DetailsActivity

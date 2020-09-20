@@ -5,7 +5,6 @@ import android.content.Context;
 import org.jetbrains.annotations.NotNull;
 
 import alexrnov.butterflies.R;
-import alexrnov.butterflies.pager.PageContentFragment;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.fragment.app.Fragment;

@@ -7,8 +7,6 @@ import android.content.res.AssetManager
 import android.graphics.Point
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
-import android.util.Size
 import android.view.View
 import android.view.Window
 import android.view.WindowInsets

@@ -3,7 +3,6 @@ package alexrnov.butterflies.model
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
-import android.util.Log
 import android.widget.TextView
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
@@ -27,7 +26,6 @@ internal class TextStyleObserver(
   }
 
   fun addView(textView: TextView) {
-    Log.i("P", "invoke fun addView()")
     // check for a specific state. Since multiple states can interleave for a given point
     // of time, if we want to check for a specific state, we always use the isAtLeast method:
     // from the above illustration we start with the INITIALIZED state which represents
