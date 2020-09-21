@@ -20,7 +20,7 @@
         <ListPreference
             android:key="font_color"
             android:title="@string/font_color"
-            android:defaultValue="#000000"
+            android:defaultValue="#393939"
             android:entries="@array/text_color_names_array"
             android:entryValues="@array/text_color_values_array"
             android:summary="@string/font_color_summary"
