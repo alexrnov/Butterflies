@@ -1,7 +1,7 @@
 # Butterflies
 eBook Butterflies of the planet
 
-Menu:
+<p align="center">Menu:</p>
 
 <p align="center">
   <img src="https://github.com/alexrnov/Files/blob/master/Butterflies1.png" width="350" title="Menu">
