@@ -25,12 +25,18 @@ Description:
   <img src="https://github.com/alexrnov/Files/blob/master/Butterflies5.png" width="350" title="Description">
 </p>
 
+Fragment dialog:
+
+<p align="center">
+  <img src="https://github.com/alexrnov/Files/blob/master/Butterflies6.png" width="350" title="Fragment dialog">
+</p>
+
 Butterflies on the world map:
 
 <p align="center">
-  <img src="https://github.com/alexrnov/Files/blob/master/Butterflies6.png" width="350" title="Map">
+  <img src="https://github.com/alexrnov/Files/blob/master/Butterflies7.png" width="350" title="Map">
 </p>
 
 <p align="center">
-  <img src="https://github.com/alexrnov/Files/blob/master/Butterflies7.png" width="350" title="Map">
+  <img src="https://github.com/alexrnov/Files/blob/master/Butterflies8.png" width="350" title="Map">
 </p>
